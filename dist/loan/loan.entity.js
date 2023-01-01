@@ -9,44 +9,56 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserEntity = void 0;
+exports.LoanEntity = void 0;
 const typeorm_1 = require("typeorm");
-let UserEntity = class UserEntity {
+let LoanEntity = class LoanEntity {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], UserEntity.prototype, "id", void 0);
+], LoanEntity.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], UserEntity.prototype, "email", void 0);
+], LoanEntity.prototype, "loanId", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], UserEntity.prototype, "passwordHash", void 0);
+], LoanEntity.prototype, "loanRef", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], UserEntity.prototype, "salt", void 0);
+], LoanEntity.prototype, "phoneNumber", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ default: true }),
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], LoanEntity.prototype, "email", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], LoanEntity.prototype, "repaymentInstrumentType", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: 'pending' }),
+    __metadata("design:type", String)
+], LoanEntity.prototype, "repaymentInstrumentStatus", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], LoanEntity.prototype, "token", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true, type: 'date' }),
+    __metadata("design:type", String)
+], LoanEntity.prototype, "tokenExpiry", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: false }),
     __metadata("design:type", Boolean)
-], UserEntity.prototype, "isActive", void 0);
+], LoanEntity.prototype, "getLoanSchedule", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true, type: "datetime" }),
+    (0, typeorm_1.Column)({ type: 'datetime' }),
     __metadata("design:type", String)
-], UserEntity.prototype, "lastLogin", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ type: "datetime" }),
-    __metadata("design:type", String)
-], UserEntity.prototype, "createdAt", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ nullable: true, type: "datetime" }),
-    __metadata("design:type", String)
-], UserEntity.prototype, "updatedAt", void 0);
-UserEntity = __decorate([
-    (0, typeorm_1.Entity)({ name: 'users' })
-], UserEntity);
-exports.UserEntity = UserEntity;
-//# sourceMappingURL=user.entity.js.map
+], LoanEntity.prototype, "createdAt", void 0);
+LoanEntity = __decorate([
+    (0, typeorm_1.Entity)('loans')
+], LoanEntity);
+exports.LoanEntity = LoanEntity;
+//# sourceMappingURL=loan.entity.js.map

@@ -1,4 +1,3 @@
-import { Timestamp } from "typeorm";
 export declare class UserEntity {
     id: number;
     email: string;
@@ -6,6 +5,6 @@ export declare class UserEntity {
     salt: string;
     isActive: boolean;
     lastLogin: string;
-    createdAt: Timestamp;
-    updatedAt: Timestamp;
+    createdAt: string;
+    updatedAt: string;
 }

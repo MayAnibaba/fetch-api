@@ -9,44 +9,48 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserEntity = void 0;
+exports.Transactions = void 0;
 const typeorm_1 = require("typeorm");
-let UserEntity = class UserEntity {
+let Transactions = class Transactions {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], UserEntity.prototype, "id", void 0);
+], Transactions.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], UserEntity.prototype, "email", void 0);
+], Transactions.prototype, "transRef", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], UserEntity.prototype, "passwordHash", void 0);
+], Transactions.prototype, "scheduleRef", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], UserEntity.prototype, "salt", void 0);
+], Transactions.prototype, "status", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ default: true }),
-    __metadata("design:type", Boolean)
-], UserEntity.prototype, "isActive", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ nullable: true, type: "datetime" }),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], UserEntity.prototype, "lastLogin", void 0);
+], Transactions.prototype, "message", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "datetime" }),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], UserEntity.prototype, "createdAt", void 0);
+], Transactions.prototype, "code", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true, type: "datetime" }),
+    (0, typeorm_1.Column)({ type: 'double' }),
+    __metadata("design:type", Number)
+], Transactions.prototype, "amount", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'text' }),
     __metadata("design:type", String)
-], UserEntity.prototype, "updatedAt", void 0);
-UserEntity = __decorate([
-    (0, typeorm_1.Entity)({ name: 'users' })
-], UserEntity);
-exports.UserEntity = UserEntity;
-//# sourceMappingURL=user.entity.js.map
+], Transactions.prototype, "data", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'datetime' }),
+    __metadata("design:type", String)
+], Transactions.prototype, "createdAt", void 0);
+Transactions = __decorate([
+    (0, typeorm_1.Entity)('transactions')
+], Transactions);
+exports.Transactions = Transactions;
+//# sourceMappingURL=transaction.entity.js.map
