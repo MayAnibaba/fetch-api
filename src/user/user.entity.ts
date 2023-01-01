@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, Timestamp } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name:'users'})
 export class UserEntity {
@@ -21,8 +21,8 @@ export class UserEntity {
     lastLogin: string;
 
     @Column({type: "datetime"})
-    createdAt: Timestamp;
+    createdAt: string;
 
     @Column({nullable: true, type: "datetime"})
-    updatedAt: Timestamp;
+    updatedAt: string;
 }
