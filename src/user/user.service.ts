@@ -3,6 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { UserEntity } from "./user.entity";
 import { Repository } from "typeorm";
 
+
 @Injectable()
 export class UserService {
     constructor(@InjectRepository(UserEntity)private readonly userRepository: Repository<UserEntity>){}
@@ -11,7 +12,11 @@ export class UserService {
         return await this.userRepository.find();
     }
 
-    async createUser(createUserDto) {
-        this.userRepository.create(createUserDto);
+    async createUser(registerRequest) {
+
+        const newUser = new UserEntity();
+        Object.assign(newUser,registerRequest);
+
+        return await this.userRepository.save(newUser);
     }
 }

@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { hashSync, genSaltSync } from "bcrypt";
 
 @Entity({name:'users'})
 export class UserEntity {
@@ -9,7 +10,7 @@ export class UserEntity {
     email: string;
 
     @Column()
-    passwordHash: string;
+    password: string;
 
     @Column()
     salt: string;
@@ -25,4 +26,24 @@ export class UserEntity {
 
     @Column({nullable: true, type: "datetime"})
     updatedAt: string;
+
+    @BeforeInsert()
+    async hashPassword() {
+        const salt = genSaltSync(10);
+        const hash = hashSync(this.password, salt);
+
+        this.password = hash;
+        this.salt = salt;
+    }
+    
+    @BeforeInsert()
+    async getCreatedDate() {
+        this.createdAt = new Date().toJSON();
+    }
+
+    @BeforeUpdate()
+    async getUpdatedDate() {
+        this.updatedAt = new Date().toJSON();
+    }
+
 }

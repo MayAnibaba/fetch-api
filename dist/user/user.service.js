@@ -24,8 +24,10 @@ let UserService = class UserService {
     async findAll() {
         return await this.userRepository.find();
     }
-    async createUser(createUserDto) {
-        this.userRepository.create(createUserDto);
+    async createUser(registerRequest) {
+        const newUser = new user_entity_1.UserEntity();
+        Object.assign(newUser, registerRequest);
+        return await this.userRepository.save(newUser);
     }
 };
 UserService = __decorate([
