@@ -24,7 +24,23 @@ export class UserController {
     @Post('register')
     async createUser(@Body() registerRequest: any): Promise<any> {
         console.log(registerRequest);
-        return this.userService.createUser(registerRequest);
+        const userCreated =  await this.userService.createUser(registerRequest);
+
+        if(userCreated == null){
+            //null indicates users wasn't created 
+            return ({
+                code: '82',
+                status: 'failure',
+                message: 'customer already exists',
+            })
+        } else {
+            return ({
+                code: '00',
+                status: 'success',
+                message: 'user created succesfully',
+                data: userCreated
+            })
+        }
     }
 
 }

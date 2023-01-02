@@ -2,6 +2,11 @@ POST http://localhost:3000/users/register
 Content-Type: application/json
 
 {
-    "email":"mayowa.anibaba@gmail.com",
+    "email":"lastesttest@gmail.com",
     "password":"password"
 }
+
+###
+
+GET http://localhost:3000/users
+Content-Type: application/json

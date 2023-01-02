@@ -31,7 +31,22 @@ let UserController = class UserController {
     }
     async createUser(registerRequest) {
         console.log(registerRequest);
-        return this.userService.createUser(registerRequest);
+        const userCreated = await this.userService.createUser(registerRequest);
+        if (userCreated == null) {
+            return ({
+                code: '82',
+                status: 'failure',
+                message: 'customer already exists',
+            });
+        }
+        else {
+            return ({
+                code: '00',
+                status: 'success',
+                message: 'user created succesfully',
+                data: userCreated
+            });
+        }
     }
 };
 __decorate([

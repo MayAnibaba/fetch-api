@@ -24,10 +24,20 @@ let UserService = class UserService {
     async findAll() {
         return await this.userRepository.find();
     }
+    async findByEmail(email) {
+        return await this.userRepository.findOneBy({ email: email });
+    }
     async createUser(registerRequest) {
-        const newUser = new user_entity_1.UserEntity();
-        Object.assign(newUser, registerRequest);
-        return await this.userRepository.save(newUser);
+        const thisUser = await this.findByEmail(registerRequest.email);
+        console.log(thisUser);
+        if (thisUser == null) {
+            const newUser = new user_entity_1.UserEntity();
+            Object.assign(newUser, registerRequest);
+            return await this.userRepository.save(newUser);
+        }
+        else {
+            return null;
+        }
     }
 };
 UserService = __decorate([

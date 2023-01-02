@@ -12,11 +12,23 @@ export class UserService {
         return await this.userRepository.find();
     }
 
+    async findByEmail(email): Promise<UserEntity>{
+        return await this.userRepository.findOneBy({email: email})
+    }
+
     async createUser(registerRequest) {
+        //check if user exists
+        const thisUser = await this.findByEmail(registerRequest.email); 
+        console.log(thisUser);
 
-        const newUser = new UserEntity();
-        Object.assign(newUser,registerRequest);
-
-        return await this.userRepository.save(newUser);
+        if(thisUser == null){
+          const newUser = new UserEntity();
+          Object.assign(newUser,registerRequest);
+          //return newly created user details
+          return await this.userRepository.save(newUser);
+        } else {
+          //return null to indicate user wasn't created 
+          return null;
+        }
     }
 }
