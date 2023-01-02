@@ -10,4 +10,8 @@ export class UserService {
     async findAll(): Promise<UserEntity[]> {
         return await this.userRepository.find();
     }
+
+    async createUser(createUserDto) {
+        this.userRepository.create(createUserDto);
+    }
 }
