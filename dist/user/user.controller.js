@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
 const user_service_1 = require("./user.service");
+const user_entity_1 = require("./user.entity");
 let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
@@ -30,7 +31,7 @@ let UserController = class UserController {
         return response;
     }
     async createUser(registerRequest) {
-        console.log(registerRequest);
+        console.log('Register request: ' + registerRequest.email);
         const userCreated = await this.userService.createUser(registerRequest);
         if (userCreated == null) {
             return ({
@@ -48,6 +49,18 @@ let UserController = class UserController {
             });
         }
     }
+    async blockUser(blockRequest) {
+        console.log('block user request:' + blockRequest.email);
+        const blockRequestMapped = new user_entity_1.UserEntity();
+        if (blockRequest.status == 'active') {
+            blockRequestMapped.isActive = true;
+        }
+        else {
+            blockRequestMapped.isActive = false;
+        }
+        blockRequestMapped.email = blockRequest.email;
+        const blockResponse = await this.userService.updateUser(blockRequestMapped);
+    }
 };
 __decorate([
     (0, common_1.Get)(),
@@ -62,6 +75,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "createUser", null);
+__decorate([
+    (0, common_1.Post)('active'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "blockUser", null);
 UserController = __decorate([
     (0, common_1.Controller)('users'),
     __metadata("design:paramtypes", [user_service_1.UserService])

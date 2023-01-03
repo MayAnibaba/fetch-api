@@ -7,6 +7,15 @@ Content-Type: application/json
 }
 
 ###
-
 GET http://localhost:3000/users
 Content-Type: application/json
+
+
+###
+POST http://localhost:3000/users/active
+Content-Type: application/json 
+
+{
+    "email":"lastesttest@gmail.com",
+    "status":"inactive"
+}

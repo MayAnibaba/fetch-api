@@ -16,7 +16,7 @@ export class UserService {
         return await this.userRepository.findOneBy({email: email})
     }
 
-    async createUser(registerRequest) {
+    async createUser(registerRequest): Promise<any>{
         //check if user exists
         const thisUser = await this.findByEmail(registerRequest.email); 
         console.log(thisUser);
@@ -30,5 +30,16 @@ export class UserService {
           //return null to indicate user wasn't created 
           return null;
         }
+    }
+
+    async updateUser(user: UserEntity): Promise<any> {
+        const updateResponse =  await this.userRepository.createQueryBuilder()
+        .update(user)
+        .set({
+            isActive: user.isActive
+        })
+        .where("email = :email", {email: user.email})
+        .execute()
+        return updateResponse;
     }
 }

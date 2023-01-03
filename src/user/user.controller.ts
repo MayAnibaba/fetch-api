@@ -23,7 +23,7 @@ export class UserController {
 
     @Post('register')
     async createUser(@Body() registerRequest: any): Promise<any> {
-        console.log(registerRequest);
+        console.log('Register request: ' + registerRequest.email);
         const userCreated =  await this.userService.createUser(registerRequest);
 
         if(userCreated == null){
@@ -41,6 +41,22 @@ export class UserController {
                 data: userCreated
             })
         }
+    }
+
+    @Post('active')
+    async blockUser(@Body() blockRequest: any) : Promise<any> {
+        console.log('block user request:' + blockRequest.email);
+
+        const blockRequestMapped = new UserEntity();
+
+        if(blockRequest.status == 'active'){
+            blockRequestMapped.isActive = true
+        } else {
+            blockRequestMapped.isActive = false
+        }
+        blockRequestMapped.email = blockRequest.email;
+
+        const blockResponse = await this.userService.updateUser(blockRequestMapped);
     }
 
 }

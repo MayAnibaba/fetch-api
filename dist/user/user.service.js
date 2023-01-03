@@ -39,6 +39,16 @@ let UserService = class UserService {
             return null;
         }
     }
+    async updateUser(user) {
+        const updateResponse = await this.userRepository.createQueryBuilder()
+            .update(user)
+            .set({
+            isActive: user.isActive
+        })
+            .where("email = :email", { email: user.email })
+            .execute();
+        return updateResponse;
+    }
 };
 UserService = __decorate([
     (0, common_1.Injectable)(),

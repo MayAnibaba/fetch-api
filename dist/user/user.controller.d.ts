@@ -4,4 +4,5 @@ export declare class UserController {
     constructor(userService: UserService);
     findAll(): Promise<any>;
     createUser(registerRequest: any): Promise<any>;
+    blockUser(blockRequest: any): Promise<any>;
 }
