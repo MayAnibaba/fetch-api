@@ -71,6 +71,29 @@ let UserController = class UserController {
     async userLogin(loginRequest) {
         console.log('block user request:' + loginRequest.email);
         const loginResponse = await this.userService.login(loginRequest);
+        if (loginResponse == 'invalidLogin') {
+            return ({
+                code: '81',
+                status: 'failure',
+                message: 'invalid login details',
+            });
+        }
+        else if (loginResponse == 'inactiveUser') {
+            return ({
+                code: '83',
+                status: 'success',
+                message: 'user account is blocked',
+                data: loginResponse
+            });
+        }
+        else {
+            return ({
+                code: '00',
+                status: 'success',
+                message: 'user login succesfully',
+                data: loginResponse
+            });
+        }
     }
 };
 __decorate([
