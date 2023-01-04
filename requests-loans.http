@@ -1,0 +1,14 @@
+### add loan
+POST http://localhost:3000/loan/add
+Content-Type: application/json
+
+{
+    "email":"lastesttest@gmail.com",
+    "phoneNumber":"07088764887",
+    "loanID":"12343423232"
+}
+
+### get all loans
+GET http://localhost:3000/loans
+Content-Type: application/json
+

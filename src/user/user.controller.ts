@@ -3,7 +3,7 @@ import { UserService } from "./user.service";
 import { UserEntity } from "./user.entity";
 import { Request, Response } from "express";
 
-@Controller('users')
+@Controller('user')
 export class UserController {
     constructor(private readonly userService: UserService) {}
 
