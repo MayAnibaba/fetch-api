@@ -54,12 +54,13 @@ let UserService = class UserService {
     async login(loginRequest) {
         const thisUser = await this.findByEmail(loginRequest.email);
         console.log(thisUser);
+        console.log('login check: ' + await (0, bcrypt_1.compareSync)(loginRequest.password, thisUser.password));
         if (thisUser == null) {
-            return 'user not found';
+            return 'nouser';
         }
         else {
             if (thisUser.isActive) {
-                if (thisUser.password == (0, bcrypt_1.hashSync)(thisUser.password, thisUser.salt)) {
+                if (await (0, bcrypt_1.compareSync)(loginRequest.password, thisUser.password)) {
                     this.userRepository.createQueryBuilder()
                         .update(thisUser)
                         .set({

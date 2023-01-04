@@ -17,7 +17,7 @@ Content-Type: application/json
 
 {
     "email":"lastesttest@gmail.com",
-    "status":"inactive"
+    "status":"active"
 }
 
 ###
@@ -26,5 +26,5 @@ Content-Type: application/json
 
 {
     "email":"lastesttest@gmail.com",
-    "password":"newpassword"
+    "password":"password"
 }

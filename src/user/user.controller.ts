@@ -1,7 +1,7 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, Post, Res } from "@nestjs/common";
 import { UserService } from "./user.service";
 import { UserEntity } from "./user.entity";
-import { map } from "rxjs";
+import { Request, Response } from "express";
 
 @Controller('users')
 export class UserController {
@@ -67,23 +67,33 @@ export class UserController {
     }
 
     @Post('login')
-    async userLogin(@Body() loginRequest: any) : Promise<any> {
-        console.log('block user request:' + loginRequest.email);
+    async userLogin(@Body() loginRequest: any, @Res({passthrough: true}) res: Response) {
+        console.log('login request:' + loginRequest.email);
         const loginResponse = await this.userService.login(loginRequest);
+        console.log('loginService Resposne: ' + loginResponse);
         if(loginResponse == 'invalidLogin'){
-            return ({
-                code: '81',
+            res.status(400);
+            return({
+                code: '90',
                 status: 'failure',
                 message: 'invalid login details',
             })
         } else if(loginResponse == 'inactiveUser') {
+            res.status(400);
             return ({
                 code: '83',
-                status: 'success',
+                status: 'failure',
                 message: 'user account is blocked',
-                data: loginResponse
+            })
+        } else if(loginResponse == 'nouser') {
+            res.status(400);
+            return ({
+                code: '81',
+                status: 'failure',
+                message: 'user not found',
             })
         } else {
+            res.status(200);
             return ({
                 code: '00',
                 status: 'success',

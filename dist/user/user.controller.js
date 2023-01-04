@@ -68,25 +68,36 @@ let UserController = class UserController {
             data: blockResponse
         });
     }
-    async userLogin(loginRequest) {
-        console.log('block user request:' + loginRequest.email);
+    async userLogin(loginRequest, res) {
+        console.log('login request:' + loginRequest.email);
         const loginResponse = await this.userService.login(loginRequest);
+        console.log('loginService Resposne: ' + loginResponse);
         if (loginResponse == 'invalidLogin') {
+            res.status(400);
             return ({
-                code: '81',
+                code: '90',
                 status: 'failure',
                 message: 'invalid login details',
             });
         }
         else if (loginResponse == 'inactiveUser') {
+            res.status(400);
             return ({
                 code: '83',
-                status: 'success',
+                status: 'failure',
                 message: 'user account is blocked',
-                data: loginResponse
+            });
+        }
+        else if (loginResponse == 'nouser') {
+            res.status(400);
+            return ({
+                code: '81',
+                status: 'failure',
+                message: 'user not found',
             });
         }
         else {
+            res.status(200);
             return ({
                 code: '00',
                 status: 'success',
@@ -119,8 +130,9 @@ __decorate([
 __decorate([
     (0, common_1.Post)('login'),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Res)({ passthrough: true })),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "userLogin", null);
 UserController = __decorate([

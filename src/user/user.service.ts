@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { UserEntity } from "./user.entity";
 import { Repository } from "typeorm";
-import { hashSync } from "bcrypt";
+import { compareSync } from "bcrypt";
 
 
 @Injectable()
@@ -49,13 +49,15 @@ export class UserService {
         //check if user exists
         const thisUser = await this.findByEmail(loginRequest.email); 
         console.log(thisUser);
+        console.log('login check: '+ await compareSync(loginRequest.password,thisUser.password));
+
 
         if(thisUser == null){
-            return 'user not found';
+            return 'nouser';
         } else {
           //check if user is active
           if(thisUser.isActive){
-            if(thisUser.password == hashSync(thisUser.password, thisUser.salt)){
+            if(await compareSync(loginRequest.password,thisUser.password)){
                 //if user if email and password match reset failed login counter and update last login
                 this.userRepository.createQueryBuilder()
                 .update(thisUser)
@@ -65,6 +67,7 @@ export class UserService {
                 })
                 .where("email = :email", {email: thisUser.email})
                 .execute()
+
                 return thisUser
               } else {
                 //if email and password doesn't match update failed attempt count and block on 3rd failure
