@@ -55,8 +55,8 @@ export class UserService {
         } else {
           //check if user is active
           if(thisUser.isActive){
-            //check if user if email and password match 
             if(thisUser.password == hashSync(thisUser.password, thisUser.salt)){
+                //if user if email and password match reset failed login counter and update last login
                 this.userRepository.createQueryBuilder()
                 .update(thisUser)
                 .set({
