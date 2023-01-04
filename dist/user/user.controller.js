@@ -30,10 +30,11 @@ let UserController = class UserController {
         });
         return response;
     }
-    async createUser(registerRequest) {
+    async createUser(registerRequest, res) {
         console.log('Register request: ' + registerRequest.email);
         const userCreated = await this.userService.createUser(registerRequest);
         if (userCreated == null) {
+            res.status(400);
             return ({
                 code: '82',
                 status: 'failure',
@@ -106,6 +107,25 @@ let UserController = class UserController {
             });
         }
     }
+    async resetPassowrd(requestbody, res) {
+        const passwordResponse = await this.userService.newPassword(requestbody);
+        if (passwordResponse == 'nouser') {
+            res.status(400);
+            return ({
+                code: '81',
+                status: 'failure',
+                message: 'user not found',
+            });
+        }
+        else {
+            return ({
+                code: '00',
+                status: 'success',
+                message: 'password changed succesfully',
+                data: passwordResponse
+            });
+        }
+    }
 };
 __decorate([
     (0, common_1.Get)(),
@@ -117,7 +137,7 @@ __decorate([
     (0, common_1.Post)('register'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "createUser", null);
 __decorate([
@@ -135,6 +155,13 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "userLogin", null);
+__decorate([
+    (0, common_1.Post)('resetpassword'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "resetPassowrd", null);
 UserController = __decorate([
     (0, common_1.Controller)('users'),
     __metadata("design:paramtypes", [user_service_1.UserService])

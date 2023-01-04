@@ -1,8 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import { Body, Injectable, Post } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { UserEntity } from "./user.entity";
 import { Repository } from "typeorm";
-import { compareSync } from "bcrypt";
+import { compareSync, hashSync, genSaltSync } from "bcrypt";
 
 
 @Injectable()
@@ -92,5 +92,31 @@ export class UserService {
             return 'inactiveUser'
           }
         }
+    }
+
+    async newPassword (passwordRequest ) : Promise<any> {
+        const thisUser = await this.findByEmail(passwordRequest.email); 
+
+        if(thisUser == null){
+            return 'nouser';
+        } else { 
+            const salt = genSaltSync(10);
+            const hash = hashSync(passwordRequest.password, salt);
+
+            const updateResponse =  await this.userRepository.createQueryBuilder()
+            .update(thisUser)
+            .set({
+                isActive: thisUser.isActive,
+                password: hash,
+                salt: salt,
+                failedLoginAttempt: 0,
+                updatedAt: new Date().toJSON()
+            })
+            .where("email = :email", {email: passwordRequest.email})
+            .execute()
+            return updateResponse;
+
+        }
+
     }
 }

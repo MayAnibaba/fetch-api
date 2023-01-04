@@ -22,11 +22,12 @@ export class UserController {
     }
 
     @Post('register')
-    async createUser(@Body() registerRequest: any): Promise<any> {
+    async createUser(@Body() registerRequest: any, res: Response): Promise<any> {
         console.log('Register request: ' + registerRequest.email);
         const userCreated =  await this.userService.createUser(registerRequest);
 
         if(userCreated == null){
+            res.status(400);
             //null indicates users wasn't created 
             return ({
                 code: '82',
@@ -99,6 +100,26 @@ export class UserController {
                 status: 'success',
                 message: 'user login succesfully',
                 data: loginResponse
+            })
+        }
+    }
+
+    @Post('resetpassword')
+    async resetPassowrd(@Body() requestbody: any , res: Response) {
+        const passwordResponse = await this.userService.newPassword(requestbody);
+        if(passwordResponse == 'nouser'){
+            res.status(400);
+            return({
+                code: '81',
+                status: 'failure',
+                message: 'user not found',
+            })
+        } else {
+            return({
+                code: '00',
+                status: 'success',
+                message: 'password changed succesfully',
+                data: passwordResponse
             })
         }
     }

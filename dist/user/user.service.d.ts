@@ -8,4 +8,5 @@ export declare class UserService {
     createUser(registerRequest: any): Promise<any>;
     updateUser(user: UserEntity): Promise<any>;
     login(loginRequest: any): Promise<any>;
+    newPassword(passwordRequest: any): Promise<any>;
 }

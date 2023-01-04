@@ -93,6 +93,28 @@ let UserService = class UserService {
             }
         }
     }
+    async newPassword(passwordRequest) {
+        const thisUser = await this.findByEmail(passwordRequest.email);
+        if (thisUser == null) {
+            return 'nouser';
+        }
+        else {
+            const salt = (0, bcrypt_1.genSaltSync)(10);
+            const hash = (0, bcrypt_1.hashSync)(passwordRequest.password, salt);
+            const updateResponse = await this.userRepository.createQueryBuilder()
+                .update(thisUser)
+                .set({
+                isActive: thisUser.isActive,
+                password: hash,
+                salt: salt,
+                failedLoginAttempt: 0,
+                updatedAt: new Date().toJSON()
+            })
+                .where("email = :email", { email: passwordRequest.email })
+                .execute();
+            return updateResponse;
+        }
+    }
 };
 UserService = __decorate([
     (0, common_1.Injectable)(),
