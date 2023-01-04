@@ -19,6 +19,9 @@ export class UserEntity {
     isActive: boolean;
 
     @Column({nullable: true, type: "datetime"})
+    failedLoginAttempt: number;
+
+    @Column({nullable: true, type: "datetime"})
     lastLogin: string;
 
     @Column({type: "datetime"})

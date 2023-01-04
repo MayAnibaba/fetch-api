@@ -60,6 +60,17 @@ let UserController = class UserController {
         }
         blockRequestMapped.email = blockRequest.email;
         const blockResponse = await this.userService.updateUser(blockRequestMapped);
+        console.log('Block user respose:' + blockResponse);
+        return ({
+            code: '00',
+            status: 'success',
+            message: 'user updated succesfully',
+            data: blockResponse
+        });
+    }
+    async userLogin(loginRequest) {
+        console.log('block user request:' + loginRequest.email);
+        const loginResponse = await this.userService.login(loginRequest);
     }
 };
 __decorate([
@@ -82,6 +93,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "blockUser", null);
+__decorate([
+    (0, common_1.Post)('login'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "userLogin", null);
 UserController = __decorate([
     (0, common_1.Controller)('users'),
     __metadata("design:paramtypes", [user_service_1.UserService])

@@ -19,3 +19,12 @@ Content-Type: application/json
     "email":"lastesttest@gmail.com",
     "status":"inactive"
 }
+
+###
+POST http://localhost:3000/users/restpassord
+Content-Type: application/json 
+
+{
+    "email":"lastesttest@gmail.com",
+    "password":"newpassword"
+}

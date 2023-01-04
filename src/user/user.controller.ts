@@ -55,8 +55,21 @@ export class UserController {
             blockRequestMapped.isActive = false
         }
         blockRequestMapped.email = blockRequest.email;
-
         const blockResponse = await this.userService.updateUser(blockRequestMapped);
+        console.log('Block user respose:' + blockResponse);
+
+        return ({
+            code: '00',
+            status: 'success',
+            message: 'user updated succesfully',
+            data: blockResponse
+        })
+    }
+
+    @Post('login')
+    async userLogin(@Body() loginRequest: any) : Promise<any> {
+        console.log('block user request:' + loginRequest.email);
+        const loginResponse = await this.userService.login(loginRequest);
     }
 
 }

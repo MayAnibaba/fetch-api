@@ -4,6 +4,7 @@ export declare class UserEntity {
     password: string;
     salt: string;
     isActive: boolean;
+    failedLoginAttempt: number;
     lastLogin: string;
     createdAt: string;
     updatedAt: string;

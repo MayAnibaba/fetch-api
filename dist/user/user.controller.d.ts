@@ -5,4 +5,5 @@ export declare class UserController {
     findAll(): Promise<any>;
     createUser(registerRequest: any): Promise<any>;
     blockUser(blockRequest: any): Promise<any>;
+    userLogin(loginRequest: any): Promise<any>;
 }

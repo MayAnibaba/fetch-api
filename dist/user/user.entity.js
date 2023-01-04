@@ -48,6 +48,10 @@ __decorate([
 ], UserEntity.prototype, "isActive", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true, type: "datetime" }),
+    __metadata("design:type", Number)
+], UserEntity.prototype, "failedLoginAttempt", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true, type: "datetime" }),
     __metadata("design:type", String)
 ], UserEntity.prototype, "lastLogin", void 0);
 __decorate([

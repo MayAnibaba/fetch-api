@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const user_entity_1 = require("./user.entity");
 const typeorm_2 = require("typeorm");
+const bcrypt_1 = require("bcrypt");
 let UserService = class UserService {
     constructor(userRepository) {
         this.userRepository = userRepository;
@@ -43,11 +44,53 @@ let UserService = class UserService {
         const updateResponse = await this.userRepository.createQueryBuilder()
             .update(user)
             .set({
-            isActive: user.isActive
+            isActive: user.isActive,
+            updatedAt: new Date().toJSON()
         })
             .where("email = :email", { email: user.email })
             .execute();
         return updateResponse;
+    }
+    async login(loginRequest) {
+        const thisUser = await this.findByEmail(loginRequest.email);
+        console.log(thisUser);
+        if (thisUser == null) {
+            return 'user not found';
+        }
+        else {
+            if (thisUser.isActive) {
+                if (thisUser.password == (0, bcrypt_1.hashSync)(thisUser.password, thisUser.salt)) {
+                    this.userRepository.createQueryBuilder()
+                        .update(thisUser)
+                        .set({
+                        failedLoginAttempt: 0,
+                        lastLogin: new Date().toJSON()
+                    })
+                        .where("email = :email", { email: thisUser.email })
+                        .execute();
+                    return thisUser;
+                }
+                else {
+                    var isActive = true;
+                    if (thisUser.failedLoginAttempt >= 2) {
+                        isActive = false;
+                    }
+                    this.userRepository.createQueryBuilder()
+                        .update(thisUser)
+                        .set({
+                        failedLoginAttempt: thisUser.failedLoginAttempt + 1,
+                        isActive: isActive,
+                        updatedAt: new Date().toJSON()
+                    })
+                        .where("email = :email", { email: thisUser.email })
+                        .execute();
+                    return 'invalidLogin';
+                }
+            }
+            else {
+                return 'inactiveUser';
+            }
+        }
     }
 };
 UserService = __decorate([

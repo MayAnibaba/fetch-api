@@ -7,4 +7,5 @@ export declare class UserService {
     findByEmail(email: any): Promise<UserEntity>;
     createUser(registerRequest: any): Promise<any>;
     updateUser(user: UserEntity): Promise<any>;
+    login(loginRequest: any): Promise<any>;
 }
