@@ -1,6 +1,7 @@
 import { LoanEntity } from "./loan.entity";
 import { Repository } from "typeorm";
 export declare class LoanService {
-    private readonly userRepository;
-    constructor(userRepository: Repository<LoanEntity>);
+    private readonly loanRepository;
+    constructor(loanRepository: Repository<LoanEntity>);
+    getAllLoans(): Promise<any>;
 }

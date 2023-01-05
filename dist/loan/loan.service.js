@@ -18,8 +18,17 @@ const typeorm_1 = require("@nestjs/typeorm");
 const loan_entity_1 = require("./loan.entity");
 const typeorm_2 = require("typeorm");
 let LoanService = class LoanService {
-    constructor(userRepository) {
-        this.userRepository = userRepository;
+    constructor(loanRepository) {
+        this.loanRepository = loanRepository;
+    }
+    async getAllLoans() {
+        const loans = await this.loanRepository.find();
+        return ({
+            code: '00',
+            status: 'successful',
+            message: 'listing all loans',
+            data: loans
+        });
     }
 };
 LoanService = __decorate([
