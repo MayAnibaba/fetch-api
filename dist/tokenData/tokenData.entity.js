@@ -12,6 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TokenDataEntity = void 0;
 const typeorm_1 = require("typeorm");
 let TokenDataEntity = class TokenDataEntity {
+    async getCreatedDate() {
+        this.createdAt = new Date().toJSON();
+    }
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
@@ -29,6 +32,12 @@ __decorate([
     (0, typeorm_1.Column)({ type: 'datetime' }),
     __metadata("design:type", String)
 ], TokenDataEntity.prototype, "createdAt", void 0);
+__decorate([
+    (0, typeorm_1.BeforeInsert)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], TokenDataEntity.prototype, "getCreatedDate", null);
 TokenDataEntity = __decorate([
     (0, typeorm_1.Entity)('tokenData')
 ], TokenDataEntity);

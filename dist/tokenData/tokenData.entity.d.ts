@@ -3,4 +3,5 @@ export declare class TokenDataEntity {
     data: string;
     loanRef: string;
     createdAt: string;
+    getCreatedDate(): Promise<void>;
 }

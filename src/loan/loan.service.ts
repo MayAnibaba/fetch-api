@@ -7,13 +7,16 @@ import { Repository } from "typeorm";
 export class LoanService{
     constructor(@InjectRepository(LoanEntity)private readonly loanRepository: Repository<LoanEntity>){}
 
-    async getAllLoans(): Promise<any>{
-        const loans = await this.loanRepository.find();
-        return ({
-            code: '00',
-            status: 'successful',
-            message: 'listing all loans',
-            data: loans
-        })
+    async getAllLoans(): Promise<LoanEntity[]>{
+        return await this.loanRepository.find();
     }
+
+    async getLoanById(loanId:string): Promise<LoanEntity>{
+        return await this.loanRepository.findOneBy({loanId: 'loanId'});
+    }
+
+    
+
+  
+
 }

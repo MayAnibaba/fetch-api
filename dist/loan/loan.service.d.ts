@@ -3,5 +3,6 @@ import { Repository } from "typeorm";
 export declare class LoanService {
     private readonly loanRepository;
     constructor(loanRepository: Repository<LoanEntity>);
-    getAllLoans(): Promise<any>;
+    getAllLoans(): Promise<LoanEntity[]>;
+    getLoanById(loanId: string): Promise<LoanEntity>;
 }

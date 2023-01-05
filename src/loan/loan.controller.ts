@@ -7,6 +7,12 @@ export class LoanController {
 
     @Get()
     async getAllLoans() {
-        return this.loanService.getAllLoans();
+        const loans = await this.loanService.getAllLoans();
+        return ({
+            code: '00',
+            status: 'successful',
+            message: 'listing all loans',
+            data: loans
+        })
     }
 }

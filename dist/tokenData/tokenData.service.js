@@ -12,26 +12,22 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LoanService = void 0;
+exports.TokenDataService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
-const loan_entity_1 = require("./loan.entity");
+const tokenData_entity_1 = require("./tokenData.entity");
 const typeorm_2 = require("typeorm");
-let LoanService = class LoanService {
-    constructor(loanRepository) {
-        this.loanRepository = loanRepository;
+let TokenDataService = class TokenDataService {
+    constructor(tokenDataRepository) {
+        this.tokenDataRepository = tokenDataRepository;
     }
-    async getAllLoans() {
-        return await this.loanRepository.find();
-    }
-    async getLoanById(loanId) {
-        return await this.loanRepository.findOneBy({ loanId: 'loanId' });
+    async addTokenData(tokenData) {
     }
 };
-LoanService = __decorate([
+TokenDataService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_1.InjectRepository)(loan_entity_1.LoanEntity)),
+    __param(0, (0, typeorm_1.InjectRepository)(tokenData_entity_1.TokenDataEntity)),
     __metadata("design:paramtypes", [typeorm_2.Repository])
-], LoanService);
-exports.LoanService = LoanService;
-//# sourceMappingURL=loan.service.js.map
+], TokenDataService);
+exports.TokenDataService = TokenDataService;
+//# sourceMappingURL=tokenData.service.js.map

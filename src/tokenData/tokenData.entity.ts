@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('tokenData')
 export class TokenDataEntity {
@@ -13,4 +13,10 @@ export class TokenDataEntity {
 
     @Column({type: 'datetime'})
     createdAt: string;
+
+    @BeforeInsert()
+    async getCreatedDate() {
+        this.createdAt = new Date().toJSON();
+    }
+
 }
