@@ -1,5 +1,5 @@
 ### register
-POST http://localhost:3000/user/register
+POST http://localhost:3000/users/register
 Content-Type: application/json
 
 {
@@ -8,12 +8,12 @@ Content-Type: application/json
 }
 
 ### get all users
-GET http://localhost:3000/user
+GET http://localhost:3000/users
 Content-Type: application/json
 
 
 ### block user
-POST http://localhost:3000/user/active
+POST http://localhost:3000/users/active
 Content-Type: application/json 
 
 {
@@ -22,7 +22,7 @@ Content-Type: application/json
 }
 
 ### login
-POST http://localhost:3000/user/login
+POST http://localhost:3000/users/login
 Content-Type: application/json 
 
 {
@@ -31,7 +31,7 @@ Content-Type: application/json
 }
 
 ### reset password
-POST http://localhost:3000/userß/resetpassword
+POST http://localhost:3000/users/resetpassword
 Content-Type: application/json 
 
 {
