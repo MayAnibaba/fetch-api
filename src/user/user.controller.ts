@@ -22,7 +22,7 @@ export class UserController {
     }
 
     @Post('register')
-    async createUser(@Body() registerRequest: any, res: Response): Promise<any> {
+    async createUser(@Body() registerRequest: any, res: Response) {
         console.log('Register request: ' + registerRequest.email);
         const userCreated =  await this.userService.createUser(registerRequest);
 
@@ -45,7 +45,7 @@ export class UserController {
     }
 
     @Post('active')
-    async blockUser(@Body() blockRequest: any) : Promise<any> {
+    async blockUser(@Body() blockRequest: any) {
         console.log('block user request:' + blockRequest.email);
 
         const blockRequestMapped = new UserEntity();
