@@ -15,7 +15,9 @@ export class LoanService{
         return await this.loanRepository.findOneBy({loanId: 'loanId'});
     }
 
-    
+    async createLoan(loanData:LoanEntity): Promise<any>{
+        return await this.loanRepository.create(loanData);
+    }
 
   
 
