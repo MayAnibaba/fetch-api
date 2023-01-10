@@ -23,7 +23,7 @@ export class UserController {
 
     @Post('register')
     async createUser(@Body() registerRequest: any, res: Response) {
-        console.log('Register request: ' + registerRequest.email);
+        console.log('Register request: ' + JSON.stringify(registerRequest));
         const userCreated =  await this.userService.createUser(registerRequest);
 
         if(userCreated == null){
@@ -46,7 +46,7 @@ export class UserController {
 
     @Post('active')
     async blockUser(@Body() blockRequest: any) {
-        console.log('block user request:' + blockRequest.email);
+        console.log('block user request: ' + JSON.stringify(blockRequest.email));
 
         const blockRequestMapped = new UserEntity();
 
@@ -69,7 +69,7 @@ export class UserController {
 
     @Post('login')
     async userLogin(@Body() loginRequest: any, @Res({passthrough: true}) res: Response) {
-        console.log('login request:' + loginRequest.email);
+        console.log('login request: ' + JSON.stringify(loginRequest));
         const loginResponse = await this.userService.login(loginRequest);
         console.log('loginService Resposne: ' + loginResponse);
         if(loginResponse == 'invalidLogin'){
@@ -106,6 +106,7 @@ export class UserController {
 
     @Post('resetpassword')
     async resetPassowrd(@Body() requestbody: any , res: Response) {
+        console.log('Reset password: ' + JSON.stringify(requestbody))
         const passwordResponse = await this.userService.newPassword(requestbody);
         if(passwordResponse == 'nouser'){
             res.status(400);

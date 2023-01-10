@@ -1,5 +1,5 @@
 ### add loan
-POST http://localhost:3000/loan/add
+POST http://localhost:3000/loans/add
 Content-Type: application/json
 
 {

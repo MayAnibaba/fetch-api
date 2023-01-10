@@ -31,7 +31,7 @@ let UserController = class UserController {
         return response;
     }
     async createUser(registerRequest, res) {
-        console.log('Register request: ' + registerRequest.email);
+        console.log('Register request: ' + JSON.stringify(registerRequest));
         const userCreated = await this.userService.createUser(registerRequest);
         if (userCreated == null) {
             res.status(400);
@@ -51,7 +51,7 @@ let UserController = class UserController {
         }
     }
     async blockUser(blockRequest) {
-        console.log('block user request:' + blockRequest.email);
+        console.log('block user request: ' + JSON.stringify(blockRequest.email));
         const blockRequestMapped = new user_entity_1.UserEntity();
         if (blockRequest.status == 'active') {
             blockRequestMapped.isActive = true;
@@ -70,7 +70,7 @@ let UserController = class UserController {
         });
     }
     async userLogin(loginRequest, res) {
-        console.log('login request:' + loginRequest.email);
+        console.log('login request: ' + JSON.stringify(loginRequest));
         const loginResponse = await this.userService.login(loginRequest);
         console.log('loginService Resposne: ' + loginResponse);
         if (loginResponse == 'invalidLogin') {
@@ -108,6 +108,7 @@ let UserController = class UserController {
         }
     }
     async resetPassowrd(requestbody, res) {
+        console.log('Reset password: ' + JSON.stringify(requestbody));
         const passwordResponse = await this.userService.newPassword(requestbody);
         if (passwordResponse == 'nouser') {
             res.status(400);

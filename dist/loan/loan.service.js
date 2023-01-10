@@ -27,6 +27,9 @@ let LoanService = class LoanService {
     async getLoanById(loanId) {
         return await this.loanRepository.findOneBy({ loanId: 'loanId' });
     }
+    async createLoan(loanData) {
+        return await this.loanRepository.create(loanData);
+    }
 };
 LoanService = __decorate([
     (0, common_1.Injectable)(),
