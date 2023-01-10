@@ -28,7 +28,7 @@ let LoanController = class LoanController {
             data: loans
         });
     }
-    async createLoan(addRequest, addResponse) {
+    async createLoan(addRequest, res) {
         console.log('add loan request: ' + JSON.stringify(addRequest));
         try {
             const response = await fetch('http://52.168.85.231/BankOneWebAPI/api/Loan/GetLoanByID/2?authtoken=e226bce9-c861-4eab-9a2e-cece85b3615b&loanID=05690013022002889', {
@@ -37,10 +37,14 @@ let LoanController = class LoanController {
             });
             const data = await response.json();
             console.log(data);
-            console.log(data.IsSuccessful);
             if (data.IsSuccessful) {
             }
             else {
+                return ({
+                    code: '81',
+                    status: 'failure',
+                    message: 'loan Id not found',
+                });
             }
         }
         catch (e) {
@@ -57,7 +61,6 @@ __decorate([
 __decorate([
     (0, common_1.Post)('add'),
     __param(0, (0, common_1.Body)()),
-    __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)

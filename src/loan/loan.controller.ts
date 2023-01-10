@@ -1,6 +1,6 @@
-import { Body, Controller, Get, Post, Res } from "@nestjs/common";
+import { Body, Controller, Get, Post } from "@nestjs/common";
 import { LoanService } from "./loan.service";
-import { HttpModule } from "@nestjs/axios";
+import { Response as Res } from "express";
 
 
 @Controller('loans')
@@ -19,7 +19,7 @@ export class LoanController {
     }
 
     @Post('add')
-    async createLoan(@Body() addRequest: any, @Res() addResponse: any){
+    async createLoan(@Body() addRequest: any, res: Res){
         console.log('add loan request: ' + JSON.stringify(addRequest));
 
         try {   
@@ -31,12 +31,16 @@ export class LoanController {
 
             const data = await response.json();
             console.log(data);
-            console.log(data.IsSuccessful);
 
             if(data.IsSuccessful){
 
             } else {
-                
+                //res.status(400);
+                return({
+                    code: '81',
+                    status: 'failure',
+                    message: 'loan Id not found',
+                })
             }
 
         } catch (e) {
