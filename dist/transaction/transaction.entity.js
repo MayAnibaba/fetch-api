@@ -9,48 +9,48 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Transactions = void 0;
+exports.TransactionEntity = void 0;
 const typeorm_1 = require("typeorm");
-let Transactions = class Transactions {
+let TransactionEntity = class TransactionEntity {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], Transactions.prototype, "id", void 0);
+], TransactionEntity.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Transactions.prototype, "transRef", void 0);
+], TransactionEntity.prototype, "transRef", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Transactions.prototype, "scheduleRef", void 0);
+], TransactionEntity.prototype, "scheduleRef", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Transactions.prototype, "status", void 0);
+], TransactionEntity.prototype, "status", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Transactions.prototype, "message", void 0);
+], TransactionEntity.prototype, "message", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Transactions.prototype, "code", void 0);
+], TransactionEntity.prototype, "code", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'double' }),
     __metadata("design:type", Number)
-], Transactions.prototype, "amount", void 0);
+], TransactionEntity.prototype, "amount", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'text' }),
     __metadata("design:type", String)
-], Transactions.prototype, "data", void 0);
+], TransactionEntity.prototype, "data", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'datetime' }),
     __metadata("design:type", String)
-], Transactions.prototype, "createdAt", void 0);
-Transactions = __decorate([
+], TransactionEntity.prototype, "createdAt", void 0);
+TransactionEntity = __decorate([
     (0, typeorm_1.Entity)('transactions')
-], Transactions);
-exports.Transactions = Transactions;
+], TransactionEntity);
+exports.TransactionEntity = TransactionEntity;
 //# sourceMappingURL=transaction.entity.js.map

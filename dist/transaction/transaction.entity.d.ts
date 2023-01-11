@@ -1,4 +1,4 @@
-export declare class Transactions {
+export declare class TransactionEntity {
     id: number;
     transRef: string;
     scheduleRef: string;

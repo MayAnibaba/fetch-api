@@ -1,5 +1,4 @@
 import { LoanService } from "./loan.service";
-import { Response as Res } from "express";
 export declare class LoanController {
     private readonly loanService;
     constructor(loanService: LoanService);
@@ -9,7 +8,7 @@ export declare class LoanController {
         message: string;
         data: import("./loan.entity").LoanEntity[];
     }>;
-    createLoan(addRequest: any, res: Res): Promise<{
+    createLoan(addRequest: any, res: any): Promise<{
         code: string;
         status: string;
         message: string;

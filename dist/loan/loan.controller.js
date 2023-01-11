@@ -40,6 +40,7 @@ let LoanController = class LoanController {
             if (data.IsSuccessful) {
             }
             else {
+                res.status(common_1.HttpStatus.BAD_REQUEST);
                 return ({
                     code: '81',
                     status: 'failure',
@@ -61,6 +62,7 @@ __decorate([
 __decorate([
     (0, common_1.Post)('add'),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Res)({ passthrough: true })),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)

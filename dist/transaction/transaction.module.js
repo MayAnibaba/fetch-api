@@ -6,23 +6,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppModule = void 0;
+exports.TransactionModule = void 0;
 const common_1 = require("@nestjs/common");
-const app_controller_1 = require("./app.controller");
-const app_service_1 = require("./app.service");
 const typeorm_1 = require("@nestjs/typeorm");
-const ormconfig_1 = require("./ormconfig");
-const user_module_1 = require("./user/user.module");
-const loan_module_1 = require("./loan/loan.module");
-const transaction_module_1 = require("./transaction/transaction.module");
-let AppModule = class AppModule {
+const transaction_entity_1 = require("./transaction.entity");
+const transaction_controller_1 = require("./transaction.controller");
+const transaction_service_1 = require("./transaction.service");
+let TransactionModule = class TransactionModule {
 };
-AppModule = __decorate([
+TransactionModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forRoot(ormconfig_1.default), user_module_1.UserModule, loan_module_1.LoanModule, transaction_module_1.TransactionModule],
-        controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        imports: [typeorm_1.TypeOrmModule.forFeature([transaction_entity_1.TransactionEntity])],
+        controllers: [transaction_controller_1.TransactionController],
+        providers: [transaction_service_1.TransactionService]
     })
-], AppModule);
-exports.AppModule = AppModule;
-//# sourceMappingURL=app.module.js.map
+], TransactionModule);
+exports.TransactionModule = TransactionModule;
+//# sourceMappingURL=transaction.module.js.map

@@ -1,6 +1,5 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, HttpStatus, Post, Res } from "@nestjs/common";
 import { LoanService } from "./loan.service";
-import { Response as Res } from "express";
 
 
 @Controller('loans')
@@ -19,7 +18,7 @@ export class LoanController {
     }
 
     @Post('add')
-    async createLoan(@Body() addRequest: any, res: Res){
+    async createLoan(@Body() addRequest: any, @Res({passthrough: true}) res){
         console.log('add loan request: ' + JSON.stringify(addRequest));
 
         try {   
@@ -35,7 +34,7 @@ export class LoanController {
             if(data.IsSuccessful){
 
             } else {
-                //res.status(400);
+                res.status(HttpStatus.BAD_REQUEST);
                 return({
                     code: '81',
                     status: 'failure',
