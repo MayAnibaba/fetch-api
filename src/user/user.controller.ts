@@ -1,7 +1,7 @@
-import { Body, Controller, Get, Post, Res } from "@nestjs/common";
+import { Body, Controller, Get, Post, Res, HttpStatus } from "@nestjs/common";
 import { UserService } from "./user.service";
 import { UserEntity } from "./user.entity";
-import { Request, Response } from "express";
+//import { Request, Response } from "express";
 
 @Controller('users')
 export class UserController {
@@ -22,12 +22,12 @@ export class UserController {
     }
 
     @Post('register')
-    async createUser(@Body() registerRequest: any, res: Response) {
+    async createUser(@Body() registerRequest: any, @Res({passthrough: true}) res) {
         console.log('Register request: ' + JSON.stringify(registerRequest));
         const userCreated =  await this.userService.createUser(registerRequest);
 
         if(userCreated == null){
-            res.status(400);
+            res.status(HttpStatus.BAD_REQUEST);
             //null indicates users wasn't created 
             return ({
                 code: '82',
@@ -68,33 +68,33 @@ export class UserController {
     }
 
     @Post('login')
-    async userLogin(@Body() loginRequest: any, @Res({passthrough: true}) res: Response) {
+    async userLogin(@Body() loginRequest: any, @Res({passthrough: true}) res) {
         console.log('login request: ' + JSON.stringify(loginRequest));
         const loginResponse = await this.userService.login(loginRequest);
         console.log('loginService Resposne: ' + loginResponse);
         if(loginResponse == 'invalidLogin'){
-            res.status(400);
+            res.status(HttpStatus.BAD_REQUEST);
             return({
                 code: '90',
                 status: 'failure',
                 message: 'invalid login details',
             })
         } else if(loginResponse == 'inactiveUser') {
-            res.status(400);
+            res.status(HttpStatus.BAD_REQUEST);
             return ({
                 code: '83',
                 status: 'failure',
                 message: 'user account is blocked',
             })
         } else if(loginResponse == 'nouser') {
-            res.status(400);
+            res.status(HttpStatus.BAD_REQUEST);
             return ({
                 code: '81',
                 status: 'failure',
                 message: 'user not found',
             })
         } else {
-            res.status(200);
+            res.status(HttpStatus.OK);
             return ({
                 code: '00',
                 status: 'success',
@@ -105,11 +105,11 @@ export class UserController {
     }
 
     @Post('resetpassword')
-    async resetPassowrd(@Body() requestbody: any , res: Response) {
+    async resetPassowrd(@Body() requestbody: any , @Res({passthrough: true}) res) {
         console.log('Reset password: ' + JSON.stringify(requestbody))
         const passwordResponse = await this.userService.newPassword(requestbody);
         if(passwordResponse == 'nouser'){
-            res.status(400);
+            res.status(HttpStatus.BAD_REQUEST);
             return({
                 code: '81',
                 status: 'failure',

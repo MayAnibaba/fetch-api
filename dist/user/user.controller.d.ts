@@ -1,10 +1,9 @@
 import { UserService } from "./user.service";
-import { Response } from "express";
 export declare class UserController {
     private readonly userService;
     constructor(userService: UserService);
     findAll(): Promise<any>;
-    createUser(registerRequest: any, res: Response): Promise<{
+    createUser(registerRequest: any, res: any): Promise<{
         code: string;
         status: string;
         message: string;
@@ -21,7 +20,7 @@ export declare class UserController {
         message: string;
         data: any;
     }>;
-    userLogin(loginRequest: any, res: Response): Promise<{
+    userLogin(loginRequest: any, res: any): Promise<{
         code: string;
         status: string;
         message: string;
@@ -32,7 +31,7 @@ export declare class UserController {
         message: string;
         data: any;
     }>;
-    resetPassowrd(requestbody: any, res: Response): Promise<{
+    resetPassowrd(requestbody: any, res: any): Promise<{
         code: string;
         status: string;
         message: string;

@@ -34,7 +34,7 @@ let UserController = class UserController {
         console.log('Register request: ' + JSON.stringify(registerRequest));
         const userCreated = await this.userService.createUser(registerRequest);
         if (userCreated == null) {
-            res.status(400);
+            res.status(common_1.HttpStatus.BAD_REQUEST);
             return ({
                 code: '82',
                 status: 'failure',
@@ -74,7 +74,7 @@ let UserController = class UserController {
         const loginResponse = await this.userService.login(loginRequest);
         console.log('loginService Resposne: ' + loginResponse);
         if (loginResponse == 'invalidLogin') {
-            res.status(400);
+            res.status(common_1.HttpStatus.BAD_REQUEST);
             return ({
                 code: '90',
                 status: 'failure',
@@ -82,7 +82,7 @@ let UserController = class UserController {
             });
         }
         else if (loginResponse == 'inactiveUser') {
-            res.status(400);
+            res.status(common_1.HttpStatus.BAD_REQUEST);
             return ({
                 code: '83',
                 status: 'failure',
@@ -90,7 +90,7 @@ let UserController = class UserController {
             });
         }
         else if (loginResponse == 'nouser') {
-            res.status(400);
+            res.status(common_1.HttpStatus.BAD_REQUEST);
             return ({
                 code: '81',
                 status: 'failure',
@@ -98,7 +98,7 @@ let UserController = class UserController {
             });
         }
         else {
-            res.status(200);
+            res.status(common_1.HttpStatus.OK);
             return ({
                 code: '00',
                 status: 'success',
@@ -111,7 +111,7 @@ let UserController = class UserController {
         console.log('Reset password: ' + JSON.stringify(requestbody));
         const passwordResponse = await this.userService.newPassword(requestbody);
         if (passwordResponse == 'nouser') {
-            res.status(400);
+            res.status(common_1.HttpStatus.BAD_REQUEST);
             return ({
                 code: '81',
                 status: 'failure',
@@ -137,6 +137,7 @@ __decorate([
 __decorate([
     (0, common_1.Post)('register'),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Res)({ passthrough: true })),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
@@ -159,6 +160,7 @@ __decorate([
 __decorate([
     (0, common_1.Post)('resetpassword'),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Res)({ passthrough: true })),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
