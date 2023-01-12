@@ -24,8 +24,8 @@ let LoanService = class LoanService {
     async getAllLoans() {
         return await this.loanRepository.find();
     }
-    async getLoanById(loanId) {
-        return await this.loanRepository.findOneBy({ loanId: 'loanId' });
+    async getLoanById(loanAcc) {
+        return await this.loanRepository.findOneBy({ loanAccountNumber: 'loanAcc' });
     }
     async createLoan(loanData) {
         return await this.loanRepository.create(loanData);

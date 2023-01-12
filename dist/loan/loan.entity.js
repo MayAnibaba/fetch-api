@@ -20,7 +20,7 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], LoanEntity.prototype, "loanId", void 0);
+], LoanEntity.prototype, "loanAccountNumber", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)

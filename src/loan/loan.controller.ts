@@ -22,7 +22,7 @@ export class LoanController {
         console.log('add loan request: ' + JSON.stringify(addRequest));
 
         try {   
-            const response  =  await fetch('http://52.168.85.231/BankOneWebAPI/api/Loan/GetLoanByID/2?authtoken=e226bce9-c861-4eab-9a2e-cece85b3615b&loanID=05690013022002889', {
+            const response  =  await fetch('http://52.168.85.231/BankOneWebAPI/api/Loan/GetLoanByAccountNumber/2?authtoken=e226bce9-c861-4eab-9a2e-cece85b3615b&loanAccountNumber=05690013022002889&institutionCode=100618', {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'},
                 //body: '{}'

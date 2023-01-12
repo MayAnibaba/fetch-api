@@ -7,7 +7,7 @@ export class LoanEntity {
     id: number;
 
     @Column()
-    loanId: string;
+    loanAccountNumber: string;
 
     @Column()
     loanRef: string;

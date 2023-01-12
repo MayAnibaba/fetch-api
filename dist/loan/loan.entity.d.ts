@@ -1,6 +1,6 @@
 export declare class LoanEntity {
     id: number;
-    loanId: string;
+    loanAccountNumber: string;
     loanRef: string;
     phoneNumber: string;
     email: string;
