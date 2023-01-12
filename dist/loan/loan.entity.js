@@ -35,6 +35,10 @@ __decorate([
 ], LoanEntity.prototype, "email", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], LoanEntity.prototype, "loanAmount", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], LoanEntity.prototype, "repaymentInstrumentType", void 0);
 __decorate([

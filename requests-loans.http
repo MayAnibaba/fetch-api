@@ -5,7 +5,7 @@ Content-Type: application/json
 {
     "email":"lastesttest@gmail.com",
     "phoneNumber":"07088764887",
-    "loanID":"12343423232"
+    "loanAccountNumber":"05690013022002889"
 }
 
 ### get all loans

@@ -19,6 +19,9 @@ export class LoanEntity {
     email: string;
 
     @Column()
+    loanAmount: number;
+
+    @Column()
     repaymentInstrumentType: string;
 
     @Column({default: 'pending' })

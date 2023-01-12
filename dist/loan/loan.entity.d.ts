@@ -4,6 +4,7 @@ export declare class LoanEntity {
     loanRef: string;
     phoneNumber: string;
     email: string;
+    loanAmount: number;
     repaymentInstrumentType: string;
     repaymentInstrumentStatus: string;
     token: string;
