@@ -1,5 +1,6 @@
 import { Body, Controller, Get, HttpStatus, Post, Res } from "@nestjs/common";
 import { LoanService } from "./loan.service";
+import restConfig from "src/restconfig";
 
 
 @Controller('loans')
@@ -22,7 +23,9 @@ export class LoanController {
         console.log('add loan request: ' + JSON.stringify(addRequest));
 
         try {   
-            const response  =  await fetch('http://52.168.85.231/BankOneWebAPI/api/Loan/GetLoanByAccountNumber/2?authtoken=e226bce9-c861-4eab-9a2e-cece85b3615b&loanAccountNumber=05690013022002889&institutionCode=100618', {
+            const url = restConfig.bankOneUrl+'Loan/GetLoanByAccountNumber/'+restConfig.bankOneVersion+'?authtoken='+restConfig.bankOneAuthToken+'&loanAccountNumber='+addRequest.loanAccountNumber+'&institutionCode='+restConfig.bankOneInsCode;
+            console.log(url);
+            const response  =  await fetch(url, {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'},
                 //body: '{}'

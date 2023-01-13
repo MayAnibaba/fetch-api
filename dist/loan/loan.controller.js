@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.LoanController = void 0;
 const common_1 = require("@nestjs/common");
 const loan_service_1 = require("./loan.service");
+const restconfig_1 = require("../restconfig");
 let LoanController = class LoanController {
     constructor(loanService) {
         this.loanService = loanService;
@@ -31,7 +32,9 @@ let LoanController = class LoanController {
     async createLoan(addRequest, res) {
         console.log('add loan request: ' + JSON.stringify(addRequest));
         try {
-            const response = await fetch('http://52.168.85.231/BankOneWebAPI/api/Loan/GetLoanByAccountNumber/2?authtoken=e226bce9-c861-4eab-9a2e-cece85b3615b&loanAccountNumber=05690013022002889&institutionCode=100618', {
+            const url = restconfig_1.default.bankOneUrl + 'Loan/GetLoanByAccountNumber/' + restconfig_1.default.bankOneVersion + '?authtoken=' + restconfig_1.default.bankOneAuthToken + '&loanAccountNumber=' + addRequest.loanAccountNumber + '&institutionCode=' + restconfig_1.default.bankOneInsCode;
+            console.log(url);
+            const response = await fetch(url, {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
             });
