@@ -1,4 +1,5 @@
 import { LoanService } from "./loan.service";
+import { LoanEntity } from "./loan.entity";
 export declare class LoanController {
     private readonly loanService;
     constructor(loanService: LoanService);
@@ -6,7 +7,7 @@ export declare class LoanController {
         code: string;
         status: string;
         message: string;
-        data: import("./loan.entity").LoanEntity[];
+        data: LoanEntity[];
     }>;
     createLoan(addRequest: any, res: any): Promise<{
         code: string;

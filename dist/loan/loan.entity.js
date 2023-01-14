@@ -10,8 +10,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LoanEntity = void 0;
+const crypto_1 = require("crypto");
 const typeorm_1 = require("typeorm");
 let LoanEntity = class LoanEntity {
+    async getCreatedDate() {
+        this.createdAt = new Date().toJSON();
+    }
+    async generateLoanRef() {
+        this.loanRef = (0, crypto_1.randomUUID)().replace("-", "");
+    }
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
@@ -61,6 +68,18 @@ __decorate([
     (0, typeorm_1.Column)({ type: 'datetime' }),
     __metadata("design:type", String)
 ], LoanEntity.prototype, "createdAt", void 0);
+__decorate([
+    (0, typeorm_1.BeforeInsert)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], LoanEntity.prototype, "getCreatedDate", null);
+__decorate([
+    (0, typeorm_1.BeforeInsert)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], LoanEntity.prototype, "generateLoanRef", null);
 LoanEntity = __decorate([
     (0, typeorm_1.Entity)('loans')
 ], LoanEntity);

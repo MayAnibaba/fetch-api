@@ -16,6 +16,7 @@ exports.LoanController = void 0;
 const common_1 = require("@nestjs/common");
 const loan_service_1 = require("./loan.service");
 const restconfig_1 = require("../restconfig");
+const loan_entity_1 = require("./loan.entity");
 let LoanController = class LoanController {
     constructor(loanService) {
         this.loanService = loanService;
@@ -41,6 +42,14 @@ let LoanController = class LoanController {
             const data = await response.json();
             console.log(data);
             if (data.IsSuccessful) {
+                const loanEntity = new loan_entity_1.LoanEntity();
+                loanEntity.loanAccountNumber = addRequest.loanAccountNumber;
+                loanEntity.email = addRequest.email;
+                loanEntity.phoneNumber = addRequest.phoneNumber;
+                loanEntity.loanAmount = data.LoanAmount.toString();
+                loanEntity.repaymentInstrumentType = 'card';
+                const createLoanResponse = await this.loanService.createLoan(loanEntity);
+                console.log(createLoanResponse);
             }
             else {
                 res.status(common_1.HttpStatus.BAD_REQUEST);

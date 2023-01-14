@@ -11,4 +11,6 @@ export declare class LoanEntity {
     tokenExpiry: string;
     getLoanSchedule: boolean;
     createdAt: string;
+    getCreatedDate(): Promise<void>;
+    generateLoanRef(): Promise<void>;
 }

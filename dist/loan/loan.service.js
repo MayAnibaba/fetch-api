@@ -28,7 +28,7 @@ let LoanService = class LoanService {
         return await this.loanRepository.findOneBy({ loanAccountNumber: 'loanAcc' });
     }
     async createLoan(loanData) {
-        return await this.loanRepository.create(loanData);
+        return await this.loanRepository.save(loanData);
     }
 };
 LoanService = __decorate([

@@ -16,7 +16,7 @@ export class LoanService{
     }
 
     async createLoan(loanData:LoanEntity): Promise<any>{
-        return await this.loanRepository.create(loanData);
+        return await this.loanRepository.save(loanData);
     }
 
   

@@ -1,6 +1,7 @@
 import { Body, Controller, Get, HttpStatus, Post, Res } from "@nestjs/common";
 import { LoanService } from "./loan.service";
 import restConfig from "src/restconfig";
+import { LoanEntity } from "./loan.entity";
 
 
 @Controller('loans')
@@ -35,6 +36,16 @@ export class LoanController {
             console.log(data);
 
             if(data.IsSuccessful){
+                const loanEntity = new LoanEntity();
+
+                loanEntity.loanAccountNumber = addRequest.loanAccountNumber;
+                loanEntity.email = addRequest.email;
+                loanEntity.phoneNumber = addRequest.phoneNumber;
+                loanEntity.loanAmount = data.LoanAmount.toString();
+                loanEntity.repaymentInstrumentType = 'card';
+
+                const createLoanResponse = await this.loanService.createLoan(loanEntity);
+                console.log(createLoanResponse)
 
             } else {
                 res.status(HttpStatus.BAD_REQUEST);
