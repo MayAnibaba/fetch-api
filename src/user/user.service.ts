@@ -17,20 +17,8 @@ export class UserService {
         return await this.userRepository.findOneBy({email: email})
     }
 
-    async createUser(registerRequest): Promise<any>{
-        //check if user exists
-        const thisUser = await this.findByEmail(registerRequest.email); 
-        console.log(thisUser);
-
-        if(thisUser == null){
-          const newUser = new UserEntity();
-          Object.assign(newUser,registerRequest);
-          //return newly created user details
-          return await this.userRepository.save(newUser);
-        } else {
-          //return null to indicate user wasn't created 
-          return null;
-        }
+    async createUser(registerRequest: UserEntity): Promise<any>{
+          return await this.userRepository.save(registerRequest);
     }
 
     async updateUser(user: UserEntity): Promise<any> {

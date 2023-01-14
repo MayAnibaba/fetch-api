@@ -7,12 +7,12 @@ export declare class UserController {
         code: string;
         status: string;
         message: string;
-        data?: undefined;
+        data: any;
     } | {
         code: string;
         status: string;
         message: string;
-        data: any;
+        data?: undefined;
     }>;
     blockUser(blockRequest: any): Promise<{
         code: string;

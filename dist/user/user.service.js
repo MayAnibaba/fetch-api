@@ -29,16 +29,7 @@ let UserService = class UserService {
         return await this.userRepository.findOneBy({ email: email });
     }
     async createUser(registerRequest) {
-        const thisUser = await this.findByEmail(registerRequest.email);
-        console.log(thisUser);
-        if (thisUser == null) {
-            const newUser = new user_entity_1.UserEntity();
-            Object.assign(newUser, registerRequest);
-            return await this.userRepository.save(newUser);
-        }
-        else {
-            return null;
-        }
+        return await this.userRepository.save(registerRequest);
     }
     async updateUser(user) {
         const updateResponse = await this.userRepository.createQueryBuilder()

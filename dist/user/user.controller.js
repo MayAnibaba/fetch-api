@@ -32,21 +32,24 @@ let UserController = class UserController {
     }
     async createUser(registerRequest, res) {
         console.log('Register request: ' + JSON.stringify(registerRequest));
-        const userCreated = await this.userService.createUser(registerRequest);
-        if (userCreated == null) {
-            res.status(common_1.HttpStatus.BAD_REQUEST);
-            return ({
-                code: '82',
-                status: 'failure',
-                message: 'customer already exists',
-            });
-        }
-        else {
+        const thisUser = await this.userService.findByEmail(registerRequest.email);
+        const newUser = new user_entity_1.UserEntity();
+        Object.assign(newUser, registerRequest);
+        if (thisUser == null) {
+            const userCreated = await this.userService.createUser(newUser);
             return ({
                 code: '00',
                 status: 'success',
                 message: 'user created succesfully',
                 data: userCreated
+            });
+        }
+        else {
+            res.status(common_1.HttpStatus.BAD_REQUEST);
+            return ({
+                code: '82',
+                status: 'failure',
+                message: 'customer already exists',
             });
         }
     }

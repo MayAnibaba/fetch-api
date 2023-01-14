@@ -41,10 +41,8 @@ export class LoanController {
     
                 if(data.IsSuccessful){
                     const loanEntity = new LoanEntity();
-    
-                    loanEntity.loanAccountNumber = addRequest.loanAccountNumber;
-                    loanEntity.email = addRequest.email;
-                    loanEntity.phoneNumber = addRequest.phoneNumber;
+                    Object.assign(loanEntity,addRequest);
+
                     loanEntity.loanAmount = data.LoanAmount.toString();
                     loanEntity.repaymentInstrumentType = 'card';
     

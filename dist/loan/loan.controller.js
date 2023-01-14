@@ -45,9 +45,7 @@ let LoanController = class LoanController {
                 console.log(data);
                 if (data.IsSuccessful) {
                     const loanEntity = new loan_entity_1.LoanEntity();
-                    loanEntity.loanAccountNumber = addRequest.loanAccountNumber;
-                    loanEntity.email = addRequest.email;
-                    loanEntity.phoneNumber = addRequest.phoneNumber;
+                    Object.assign(loanEntity, addRequest);
                     loanEntity.loanAmount = data.LoanAmount.toString();
                     loanEntity.repaymentInstrumentType = 'card';
                     const createLoanResponse = await this.loanService.createLoan(loanEntity);

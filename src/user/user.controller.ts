@@ -24,22 +24,28 @@ export class UserController {
     @Post('register')
     async createUser(@Body() registerRequest: any, @Res({passthrough: true}) res) {
         console.log('Register request: ' + JSON.stringify(registerRequest));
-        const userCreated =  await this.userService.createUser(registerRequest);
 
-        if(userCreated == null){
+        //check if user exists
+        const thisUser = await this.userService.findByEmail(registerRequest.email); 
+        
+        const newUser = new UserEntity();
+        Object.assign(newUser,registerRequest);
+
+        if(thisUser == null){
+            const userCreated =  await this.userService.createUser(newUser);
+            return ({
+                code: '00',
+                status: 'success',
+                message: 'user created succesfully',
+                data: userCreated
+            })        
+        } else {
             res.status(HttpStatus.BAD_REQUEST);
             //null indicates users wasn't created 
             return ({
                 code: '82',
                 status: 'failure',
                 message: 'customer already exists',
-            })
-        } else {
-            return ({
-                code: '00',
-                status: 'success',
-                message: 'user created succesfully',
-                data: userCreated
             })
         }
     }
