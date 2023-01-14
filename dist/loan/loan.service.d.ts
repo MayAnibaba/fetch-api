@@ -4,6 +4,6 @@ export declare class LoanService {
     private readonly loanRepository;
     constructor(loanRepository: Repository<LoanEntity>);
     getAllLoans(): Promise<LoanEntity[]>;
-    getLoanById(loanAcc: string): Promise<LoanEntity>;
+    getLoanByAcc(loanAcc: string): Promise<LoanEntity>;
     createLoan(loanData: LoanEntity): Promise<any>;
 }

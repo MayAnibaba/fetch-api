@@ -13,5 +13,11 @@ export declare class LoanController {
         code: string;
         status: string;
         message: string;
+        data: any;
+    } | {
+        code: string;
+        status: string;
+        message: string;
+        data?: undefined;
     }>;
 }

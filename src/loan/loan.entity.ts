@@ -48,7 +48,7 @@ export class LoanEntity {
 
     @BeforeInsert()
     async generateLoanRef() {
-        this.loanRef = randomUUID().replace("-","");
+        this.loanRef = randomUUID().split("-").join("");
     }
 
 }

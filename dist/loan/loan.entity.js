@@ -17,7 +17,7 @@ let LoanEntity = class LoanEntity {
         this.createdAt = new Date().toJSON();
     }
     async generateLoanRef() {
-        this.loanRef = (0, crypto_1.randomUUID)().replace("-", "");
+        this.loanRef = (0, crypto_1.randomUUID)().split("-").join("");
     }
 };
 __decorate([
