@@ -14,7 +14,7 @@ export class UserService {
     }
 
     async findByEmail(email): Promise<UserEntity>{
-        return await this.userRepository.findOneBy({email: email})
+        return await this.userRepository.findOneBy({'email': email})
     }
 
     async createUser(registerRequest: UserEntity): Promise<any>{
@@ -37,7 +37,7 @@ export class UserService {
         //check if user exists
         const thisUser = await this.findByEmail(loginRequest.email); 
         console.log(thisUser);
-        console.log('login check: '+ await compareSync(loginRequest.password,thisUser.password));
+        //console.log('login check: '+ await compareSync(loginRequest.password,thisUser.password));
 
 
         if(thisUser == null){
