@@ -30,6 +30,24 @@ let LoanController = class LoanController {
             data: loans
         });
     }
+    async getByLoanRef(loanRefRequest, res) {
+        const findLoan = await this.loanService.getLoanByRef(loanRefRequest.loanRef);
+        if (findLoan != null) {
+            return ({
+                code: '00',
+                status: 'successful',
+                message: 'listing loan',
+                data: findLoan
+            });
+        }
+        else {
+            return ({
+                code: '81',
+                status: 'failure',
+                message: 'loan account not found',
+            });
+        }
+    }
     async createLoan(addRequest, res) {
         console.log('add loan request: ' + JSON.stringify(addRequest));
         const findLoan = await this.loanService.getLoanByAcc(addRequest.loanAccountNumber);
@@ -86,6 +104,14 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], LoanController.prototype, "getAllLoans", null);
+__decorate([
+    (0, common_1.Post)('byLoanRef'),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Res)({ passthrough: true })),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], LoanController.prototype, "getByLoanRef", null);
 __decorate([
     (0, common_1.Post)('add'),
     __param(0, (0, common_1.Body)()),

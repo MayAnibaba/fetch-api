@@ -8,6 +8,15 @@ Content-Type: application/json
     "loanAccountNumber":"05690013022002889"
 }
 
+### get by loan ref
+POST http://localhost:3000/loans/byLoanRef
+Content-Type: application/json
+
+{
+    "loanRef":"5e21124bcf9e47de8e944ad850a21f43"
+}
+
+
 ### get all loans
 GET http://localhost:3000/loans
 Content-Type: application/json

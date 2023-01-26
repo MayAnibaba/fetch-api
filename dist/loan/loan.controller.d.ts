@@ -9,6 +9,17 @@ export declare class LoanController {
         message: string;
         data: LoanEntity[];
     }>;
+    getByLoanRef(loanRefRequest: any, res: any): Promise<{
+        code: string;
+        status: string;
+        message: string;
+        data: LoanEntity;
+    } | {
+        code: string;
+        status: string;
+        message: string;
+        data?: undefined;
+    }>;
     createLoan(addRequest: any, res: any): Promise<{
         code: string;
         status: string;

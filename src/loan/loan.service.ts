@@ -15,6 +15,10 @@ export class LoanService{
         return await this.loanRepository.findOneBy({loanAccountNumber: loanAcc});
     }
 
+    async getLoanByRef(_loanRef:string): Promise<LoanEntity>{
+        return await this.loanRepository.findOneBy({loanRef: _loanRef});
+    }
+
     async createLoan(loanData:LoanEntity): Promise<any>{
         return await this.loanRepository.save(loanData);
     }

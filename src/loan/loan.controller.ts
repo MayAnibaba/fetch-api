@@ -19,6 +19,25 @@ export class LoanController {
         })
     }
 
+    @Post('byLoanRef')
+    async getByLoanRef(@Body() loanRefRequest: any, @Res({passthrough: true}) res){
+        const findLoan = await this.loanService.getLoanByRef(loanRefRequest.loanRef);
+        if(findLoan != null){
+            return ({
+                code: '00',
+                status: 'successful',
+                message: 'listing loan',
+                data: findLoan
+            })
+        } else {
+            return({
+                code: '81',
+                status: 'failure',
+                message: 'loan account not found',
+            })
+        }
+    }
+
     @Post('add')
     async createLoan(@Body() addRequest: any, @Res({passthrough: true}) res){
         console.log('add loan request: ' + JSON.stringify(addRequest));
