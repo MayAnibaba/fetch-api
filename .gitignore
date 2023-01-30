@@ -136,3 +136,4 @@ dist/ormconfig.js.map
 dist/ormconfig.js
 dist/ormconfig.js
 dist/ormconfig.js.map
+src/ormconfig.ts
