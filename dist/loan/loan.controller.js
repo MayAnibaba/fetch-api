@@ -53,14 +53,11 @@ let LoanController = class LoanController {
         const findLoan = await this.loanService.getLoanByAcc(addRequest.loanAccountNumber);
         if (findLoan == null) {
             try {
+                const axios = require('axios');
                 const url = restconfig_1.default.bankOneUrl + 'Loan/GetLoanByAccountNumber/' + restconfig_1.default.bankOneVersion + '?authtoken=' + restconfig_1.default.bankOneAuthToken + '&loanAccountNumber=' + addRequest.loanAccountNumber + '&institutionCode=' + restconfig_1.default.bankOneInsCode;
                 console.log(url);
-                const response = await fetch(url, {
-                    method: 'GET',
-                    headers: { 'Content-Type': 'application/json' },
-                });
-                const data = await response.json();
-                console.log(data);
+                const { data } = await axios.get(url);
+                console.log('received: ' + JSON.stringify(data));
                 if (data.IsSuccessful) {
                     const loanEntity = new loan_entity_1.LoanEntity();
                     Object.assign(loanEntity, addRequest);

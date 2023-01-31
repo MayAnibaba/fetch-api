@@ -47,16 +47,23 @@ export class LoanController {
 
         if(findLoan == null){
             try {   
+                
+                //const data = await this.loanService.getLoanFormCBA(addRequest.loanAccountNumber);
+                const axios = require('axios');
                 const url = restConfig.bankOneUrl+'Loan/GetLoanByAccountNumber/'+restConfig.bankOneVersion+'?authtoken='+restConfig.bankOneAuthToken+'&loanAccountNumber='+addRequest.loanAccountNumber+'&institutionCode='+restConfig.bankOneInsCode;
                 console.log(url);
-                const response  =  await fetch(url, {
-                    method: 'GET',
-                    headers: {'Content-Type': 'application/json'},
-                    //body: '{}'
-                })
+
+                const {data} = await axios.get(url);
+
+                // const response  =  await fetch(url, {
+                //     method: 'GET',
+                //     headers: {'Content-Type': 'application/json'},
+                //     //body: '{}'
+                // })
     
-                const data = await response.json();
-                console.log(data);
+                //const data = await response.json();
+                console.log('received: ' + JSON.stringify(data));
+                //const dataObj = JSON.parse(data);
     
                 if(data.IsSuccessful){
                     const loanEntity = new LoanEntity();

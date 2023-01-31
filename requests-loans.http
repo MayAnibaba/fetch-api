@@ -1,4 +1,5 @@
 ### add loan
+#POST https://fetch-api-production.up.railway.app/loans/add
 POST http://localhost:3000/loans/add
 Content-Type: application/json
 
