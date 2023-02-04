@@ -2,6 +2,8 @@ import { Body, Controller, Get, HttpStatus, Post, Res } from "@nestjs/common";
 import { LoanService } from "./loan.service";
 import restConfig from "src/restconfig";
 import { LoanEntity } from "./loan.entity";
+import transporter from  "src/mailconfig";
+import nodemailer from "nodemailer";
 
 
 @Controller('loans')
@@ -75,10 +77,26 @@ export class LoanController {
                     const createLoanResponse = await this.loanService.createLoan(loanEntity);
                     console.log(createLoanResponse)
 
+                    const paystrackUrl = restConfig.webPaystackURl + createLoanResponse.loanRef;
+
+
+                      // send mail with defined transport object
+                        let info = await transporter.sendMail({
+                            from: '"Sofri MFB" <noreply@noreply.com>', // sender address
+                            to: "codegidi@live.com, "+ addRequest.email, // list of receivers
+                            subject: "Update on your application", // Subject line
+                            text: "Add your replayment instrument: " + paystrackUrl, // plain text body
+                            html: "Add your replayment instrument: <a href='"+paystrackUrl+"'>click here</a>", // html body
+                        });
+
+                        console.log("Message sent: %s", info.messageId);
+                        console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+
                     return({
                         code: '00',
                         status: 'success',
                         message: 'loan created',
+                        paystackUrl: paystrackUrl,
                         data: createLoanResponse
                     })
     
