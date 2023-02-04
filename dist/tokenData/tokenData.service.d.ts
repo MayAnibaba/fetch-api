@@ -4,4 +4,5 @@ export declare class TokenDataService {
     private readonly tokenDataRepository;
     constructor(tokenDataRepository: Repository<TokenDataEntity>);
     addTokenData(tokenData: TokenDataEntity): Promise<any>;
+    getTokenByRef(loanRef: string): Promise<TokenDataEntity[]>;
 }

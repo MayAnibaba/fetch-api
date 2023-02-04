@@ -1,0 +1,13 @@
+### add token
+POST https://fetch-api-production.up.railway.app/token/create
+Content-Type: application/json
+
+{
+    "loanRef":"23232re2323we",
+    "data":"password"
+}
+
+### get token data
+GET http://localhost:3000/token/23232re2323we
+Content-Type: application/json
+

@@ -22,6 +22,10 @@ let TokenDataService = class TokenDataService {
         this.tokenDataRepository = tokenDataRepository;
     }
     async addTokenData(tokenData) {
+        return await this.tokenDataRepository.save(tokenData);
+    }
+    async getTokenByRef(loanRef) {
+        return await this.tokenDataRepository.findBy({ loanRef: loanRef });
     }
 };
 TokenDataService = __decorate([
