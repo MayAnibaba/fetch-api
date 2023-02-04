@@ -17,6 +17,8 @@ const common_1 = require("@nestjs/common");
 const loan_service_1 = require("./loan.service");
 const restconfig_1 = require("../restconfig");
 const loan_entity_1 = require("./loan.entity");
+const mailconfig_1 = require("../mailconfig");
+const nodemailer = require("nodemailer");
 let LoanController = class LoanController {
     constructor(loanService) {
         this.loanService = loanService;
@@ -65,10 +67,21 @@ let LoanController = class LoanController {
                     loanEntity.repaymentInstrumentType = 'card';
                     const createLoanResponse = await this.loanService.createLoan(loanEntity);
                     console.log(createLoanResponse);
+                    const paystrackUrl = restconfig_1.default.webPaystackURl + createLoanResponse.loanRef;
+                    let info = await mailconfig_1.default.sendMail({
+                        from: '"Sofri MFB" <noreply@noreply.com>',
+                        to: "codegidi@live.com, " + addRequest.email,
+                        subject: "Update on your application",
+                        text: "Add your replayment instrument: " + paystrackUrl,
+                        html: "Add your replayment instrument: <a href='" + paystrackUrl + "'>click here</a>",
+                    });
+                    console.log("Message sent: %s", info.messageId);
+                    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
                     return ({
                         code: '00',
                         status: 'success',
                         message: 'loan created',
+                        paystackUrl: paystrackUrl,
                         data: createLoanResponse
                     });
                 }

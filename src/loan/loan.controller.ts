@@ -3,7 +3,7 @@ import { LoanService } from "./loan.service";
 import restConfig from "src/restconfig";
 import { LoanEntity } from "./loan.entity";
 import transporter from  "src/mailconfig";
-import nodemailer from "nodemailer";
+import * as nodemailer from 'nodemailer';
 
 
 @Controller('loans')
