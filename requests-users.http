@@ -3,7 +3,7 @@ POST https://fetch-api-production.up.railway.app/users/register
 Content-Type: application/json
 
 {
-    "email":"mayowa.anibaba@gmail.com",
+    "email":"wadeyemi@linksmfb.com",
     "password":"password"
 }
 

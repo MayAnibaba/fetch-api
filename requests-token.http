@@ -1,5 +1,5 @@
 ### add token
-POST https://fetch-api-production.up.railway.app/token/create
+POST https://fetch-api-production.up.railway.app/tokens/create
 Content-Type: application/json
 
 {
@@ -8,6 +8,6 @@ Content-Type: application/json
 }
 
 ### get token data
-GET http://localhost:3000/token/23232re2323we
+GET http://localhost:3000/tokens/23232re2323we
 Content-Type: application/json
 

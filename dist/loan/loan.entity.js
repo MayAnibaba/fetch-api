@@ -65,6 +65,10 @@ __decorate([
     __metadata("design:type", Boolean)
 ], LoanEntity.prototype, "getLoanSchedule", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ nullable: true, type: 'text' }),
+    __metadata("design:type", String)
+], LoanEntity.prototype, "cbaData", void 0);
+__decorate([
     (0, typeorm_1.Column)({ type: 'datetime' }),
     __metadata("design:type", String)
 ], LoanEntity.prototype, "createdAt", void 0);

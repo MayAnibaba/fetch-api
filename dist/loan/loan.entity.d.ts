@@ -10,6 +10,7 @@ export declare class LoanEntity {
     token: string;
     tokenExpiry: string;
     getLoanSchedule: boolean;
+    cbaData: string;
     createdAt: string;
     getCreatedDate(): Promise<void>;
     generateLoanRef(): Promise<void>;

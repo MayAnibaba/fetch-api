@@ -2,7 +2,7 @@ import { TokenDataEntity } from "./tokenData.entity";
 import { TokenDataService } from "./tokenData.service";
 import { Body, Controller, Get, HttpStatus, Post, Res, Req, Param } from "@nestjs/common";
 
-@Controller('token')
+@Controller('tokens')
 export class TokenController {
     constructor(private readonly tokenDataService : TokenDataService){}
 

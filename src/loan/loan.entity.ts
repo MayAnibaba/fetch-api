@@ -38,6 +38,9 @@ export class LoanEntity {
     @Column({default: false})
     getLoanSchedule: boolean;
 
+    @Column({nullable: true, type: 'text'})
+    cbaData: string;
+
     @Column({type: 'datetime'})
     createdAt: string
 
