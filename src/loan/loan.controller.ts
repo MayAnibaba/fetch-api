@@ -73,6 +73,7 @@ export class LoanController {
 
                     loanEntity.loanAmount = data.LoanAmount.toString();
                     loanEntity.repaymentInstrumentType = 'card';
+                    loanEntity.cbaData = JSON.stringify(data);
     
                     const createLoanResponse = await this.loanService.createLoan(loanEntity);
                     console.log(createLoanResponse)
