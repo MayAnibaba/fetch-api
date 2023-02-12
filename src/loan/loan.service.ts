@@ -35,6 +35,7 @@ export class LoanService{
                 .set({
                     token: token,
                     tokenExpiry: tokenExpiry,
+                    repaymentInstrumentStatus: 'active',
                     getLoanSchedule: true,
                     updatedAt: new Date().toJSON()
                 })
