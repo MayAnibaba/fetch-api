@@ -1,0 +1,7 @@
+### get loan schedule
+POST https://fetch-api-production.up.railway.app/loanSchedules
+Content-Type: application/json
+
+{
+    "loanRef":"e4df4a7d2f6a440187c396527d26f2be"
+}
