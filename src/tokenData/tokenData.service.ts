@@ -14,4 +14,5 @@ export class TokenDataService{
     async getTokenByRef(loanRef:string): Promise<TokenDataEntity[]>{
         return await this.tokenDataRepository.findBy({loanRef: loanRef});
     }
+
 }

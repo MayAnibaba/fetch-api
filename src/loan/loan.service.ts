@@ -16,6 +16,10 @@ export class LoanService{
         return await this.loanRepository.findOneBy({loanAccountNumber: loanAcc});
     }
 
+    async getLoanByEmail(email:string): Promise<LoanEntity>{
+        return await this.loanRepository.findOneBy({email: email});
+    }
+
     async getLoanByRef(_loanRef:string): Promise<LoanEntity>{
         return await this.loanRepository.findOneBy({loanRef: _loanRef});
     }
@@ -23,5 +27,21 @@ export class LoanService{
     async createLoan(loanData:LoanEntity): Promise<any>{
         return await this.loanRepository.save(loanData);
     }
+
+    async updateLoan (updateLoanRequest:LoanEntity,token:string,tokenExpiry:string) : Promise<any> {
+
+                this.loanRepository.createQueryBuilder()
+                .update(updateLoanRequest)
+                .set({
+                    token: token,
+                    tokenExpiry: tokenExpiry,
+                    getLoanSchedule: true,
+                    updatedAt: new Date().toJSON()
+                })
+                .where("loanRef = :loanRef", {loanRef: updateLoanRequest.loanRef})
+                .execute()
+
+    }
+
 
 }

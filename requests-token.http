@@ -3,7 +3,9 @@ POST https://fetch-api-production.up.railway.app/tokens/create
 Content-Type: application/json
 
 {
-    "loanRef":"23232re2323we",
+    "email":"23232re2323we",
+    "token":"",
+    "tokenExpiry":"",
     "data":"password"
 }
 

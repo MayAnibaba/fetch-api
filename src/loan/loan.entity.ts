@@ -44,6 +44,9 @@ export class LoanEntity {
     @Column({type: 'datetime'})
     createdAt: string
 
+    @Column({type: 'datetime'})
+    updatedAt: string
+
     @BeforeInsert()
     async getCreatedDate() {
         this.createdAt = new Date().toJSON();
