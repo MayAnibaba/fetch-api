@@ -1,5 +1,5 @@
 ### get loan schedule
-POST https://fetch-api-production.up.railway.app/loanSchedules
+POST https://fetch-api-production.up.railway.app/loanSchedules/byLoanRef
 Content-Type: application/json
 
 {

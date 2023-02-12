@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { randomUUID } from "crypto";
+import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('loanSchedule')
 export class LoanScheduleEntity {
@@ -32,5 +33,15 @@ export class LoanScheduleEntity {
 
     @Column({type: 'datetime'})
     createdAt: string;
+
+    @BeforeInsert()
+    async getCreatedDate() {
+        this.createdAt = new Date().toJSON();
+    }
+
+    @BeforeInsert()
+    async generateLoanRef() {
+        this.scheduleRef = randomUUID().split("-").join("");
+    }
 
 }
