@@ -44,7 +44,7 @@ export class LoanEntity {
     @Column({type: 'datetime'})
     createdAt: string
 
-    @Column({type: 'datetime'})
+    @Column({nullable: true,type: 'datetime'})
     updatedAt: string
 
     @BeforeInsert()
