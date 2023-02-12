@@ -25,6 +25,7 @@ export class LoanController {
     async getByLoanRef(@Body() loanRefRequest: any, @Res({passthrough: true}) res){
         const findLoan = await this.loanService.getLoanByRef(loanRefRequest.loanRef);
         if(findLoan != null){
+
             return ({
                 code: '00',
                 status: 'successful',

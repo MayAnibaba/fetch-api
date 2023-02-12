@@ -10,15 +10,15 @@ Content-Type: application/json
 }
 
 ### get by loan ref
-POST http://localhost:3150/loans/byLoanRef
+POST https://fetch-api-production.up.railway.app/loans/byLoanRef
 Content-Type: application/json
 
 {
-    "loanRef":"5e21124bcf9e47de8e944ad850a21f43"
+    "loanRef":"e4df4a7d2f6a440187c396527d26f2be"
 }
 
 
 ### get all loans
-GET http://localhost:3000/loans
+GET https://fetch-api-production.up.railway.app/loans
 Content-Type: application/json
 
