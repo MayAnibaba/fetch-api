@@ -83,16 +83,21 @@ export class LoanController {
 
 
                       // send mail with defined transport object
-                        let info = await transporter.sendMail({
-                            from: '"Sofri MFB" <noreply@noreply.com>', // sender address
-                            to: "codegidi@live.com, "+ addRequest.email, // list of receivers
-                            subject: "Update on your application", // Subject line
-                            text: "Add your replayment instrument: " + paystrackUrl, // plain text body
-                            html: "Add your replayment instrument: <a href='"+paystrackUrl+"'>click here</a>", // html body
-                        });
+                      try{
+                            let info = await transporter.sendMail({
+                                from: '"Sofri MFB" <noreply@noreply.com>', // sender address
+                                to: "codegidi@live.com, "+ addRequest.email, // list of receivers
+                                subject: "Update on your application", // Subject line
+                                text: "Add your replayment instrument: " + paystrackUrl, // plain text body
+                                html: "Add your replayment instrument: <a href='"+paystrackUrl+"'>click here</a>", // html body
+                            });
 
-                        console.log("Message sent: %s", info.messageId);
-                        console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+                            console.log("Message sent: %s", info.messageId);
+                            console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+
+                        } catch(Exception) {
+                            console.log(Exception.message);
+                        }
 
                     return({
                         code: '00',
@@ -107,7 +112,7 @@ export class LoanController {
                     return({
                         code: '81',
                         status: 'failure',
-                        message: 'loan account not found',
+                        message: 'loan account not found on BankOne',
                     })
                 }
     
