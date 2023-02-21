@@ -8,10 +8,11 @@ import { LoanModule } from './loan/loan.module';
 import { TransactionModule } from './transaction/transaction.module';
 import { LoanScheduleModule } from './loanSchedule/loanSchedule.module';
 import { TokenDataModule } from './tokenData/TokenData.Module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 
 @Module({
-  imports: [TypeOrmModule.forRoot(ormconfig),UserModule,LoanModule,TransactionModule,LoanScheduleModule,TokenDataModule],
+  imports: [TypeOrmModule.forRoot(ormconfig),UserModule,LoanModule,TransactionModule,LoanScheduleModule,TokenDataModule,DashboardModule],
   controllers: [AppController],
   providers: [AppService],
 })

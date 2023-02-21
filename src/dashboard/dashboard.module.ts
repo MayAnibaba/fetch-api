@@ -11,4 +11,4 @@ import { TypeOrmModule } from "@nestjs/typeorm";
     controllers: [DashboardContoller],
     providers: [TransactionService,LoanService]
 })
-export class TokenDataModule{}
+export class DashboardModule{}

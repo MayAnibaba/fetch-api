@@ -1,0 +1,4 @@
+### register
+GET https://fetch-api-production.up.railway.app/dashboard
+Content-Type: application/json
+
