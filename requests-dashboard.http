@@ -1,4 +1,8 @@
 ### register
-GET https://fetch-api-production.up.railway.app/dashboard
+POST https://fetch-api-production.up.railway.app/dashboard
 Content-Type: application/json
 
+{
+    "email":"wadeyemi@linksmfb.com",
+    "password":"password"
+}

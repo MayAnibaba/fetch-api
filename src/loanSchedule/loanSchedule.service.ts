@@ -14,6 +14,7 @@ export class LoanScheduleService {
 
     async getDueLoans(): Promise<LoanScheduleEntity[]> {
         const thisDataSource = new DataSource(config);
+        thisDataSource.initialize();
         return await thisDataSource.manager.query(`SELECT * FROM USERS`)
     }
 }
