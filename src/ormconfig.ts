@@ -5,7 +5,7 @@ const config: MysqlConnectionOptions = {
     host: 'containers-us-west-48.railway.app',
     port: 7472,
     username: 'root',
-    password: 'ryqskpXqaAMTIARonco1',
+    password: 'kAQoHNHQcn8OsvccnfJE',
     database: 'railway',
     entities: [__dirname + '/**/*.entity{.ts,.js}'],
     synchronize: true,
