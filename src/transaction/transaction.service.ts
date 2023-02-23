@@ -10,5 +10,7 @@ export class TransactionService{
     async getAllTransactions(): Promise<TransactionEntity[]>{
         return await this.transactionRepository.find();
     }
+
+
     
 }

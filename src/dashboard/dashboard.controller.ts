@@ -6,7 +6,7 @@ import { LoanScheduleService } from "src/loanSchedule/loanSchedule.service";
 @Controller('dashboard')
 export class DashboardContoller{
 
-    constructor(private readonly loanService : LoanService, private readonly loanSchedule : LoanScheduleService){}
+    constructor(private readonly loanService : LoanService, private readonly loanScheduleService : LoanScheduleService){}
 
     @Post()
     async dashboardData() {
@@ -19,7 +19,15 @@ export class DashboardContoller{
         let fullDate = `${year}-${month}-${day}.`;
         console.log(fullDate);
 
-        return await this.loanSchedule.getDueLoans(fullDate);
+        const dueLoans =  await this.loanScheduleService.getDueLoanSum(fullDate);
+        const activeLoans = await this.loanService.getAllActiveLoanCount();
+
+        return ({
+            dueLoan: dueLoans,
+            activeLoan: activeLoans,
+            successRate: '',
+            collectedRepayments: '',
+        })
     }
 
 

@@ -12,7 +12,21 @@ export class LoanScheduleService {
         return await this.loanScheduleRepository.findBy({loanId: loanRef});
     }
 
-    async getDueLoans(thisDate:string): Promise<LoanScheduleEntity[]> {
+    async getDueLoansCount(thisDate:string): Promise<LoanScheduleEntity[]> {
+
+        const sql = 'select count(*) from loanSchedule where Date(dueDate) = "'+ thisDate + '"';
+        console.log(sql);
+        return await this.loanScheduleRepository.query(sql);
+
+    }
+
+    async getDueLoanSum(thisDate:string): Promise<LoanScheduleEntity[]> {
+        const sql = 'select sum(dueAmount) from loanSchedule where Date(dueDate) = "'+ thisDate + '"';
+        console.log(sql);
+        return await this.loanScheduleRepository.query(sql);
+    }
+
+    async getDueLoansList(thisDate:string): Promise<LoanScheduleEntity[]> {
 
         const sql = 'select * from loanSchedule where Date(dueDate) = "'+ thisDate + '"';
         console.log(sql);

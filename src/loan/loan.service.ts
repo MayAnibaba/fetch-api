@@ -24,6 +24,14 @@ export class LoanService{
         return await this.loanRepository.findOneBy({loanRef: _loanRef});
     }
 
+    async getAllActiveLoansList(): Promise<LoanEntity[]>{
+        return await this.loanRepository.findBy({repaymentInstrumentStatus: "active"});
+    }
+
+    async getAllActiveLoanCount(): Promise<string>{
+        return await this.loanRepository.query('select count(*) from loans where repaymentInstrumentStatus = "active"');
+    }
+
     async createLoan(loanData:LoanEntity): Promise<any>{
         return await this.loanRepository.save(loanData);
     }
