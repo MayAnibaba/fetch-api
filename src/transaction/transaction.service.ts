@@ -17,7 +17,7 @@ export class TransactionService{
 
 
     async getAllTodaySum(thisDate:string): Promise<string> {
-        const sql = 'select sum(amount) from loanSchedule where status="success" and Date(createdAt) = "'+ thisDate + '"';
+        const sql = 'select sum(dueAmount) from loanSchedule where status="success" and Date(createdAt) = "'+ thisDate + '"';
         console.log(sql);
         return await this.transactionRepository.query(sql);
     }
