@@ -16,7 +16,7 @@ export class DashboardContoller{
         let month = date.getMonth();
         let year = date.getFullYear();
 
-        let fullDate = `${day}.${month}.${year}.`;
+        let fullDate = `${year}-${month}-${day}.`;
         console.log(fullDate);
 
         return await this.loanSchedule.getDueLoans(fullDate);
