@@ -10,7 +10,16 @@ export class DashboardContoller{
 
     @Post()
     async dashboardData() {
-        return await this.loanSchedule.getDueLoans();
+        const today = new Date()
+        let date = new Date()
+        let day = date.getDate();
+        let month = date.getMonth();
+        let year = date.getFullYear();
+
+        let fullDate = `${day}.${month}.${year}.`;
+        console.log(fullDate);
+
+        return await this.loanSchedule.getDueLoans(fullDate);
     }
 
 

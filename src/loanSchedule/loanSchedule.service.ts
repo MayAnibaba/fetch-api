@@ -12,11 +12,9 @@ export class LoanScheduleService {
         return await this.loanScheduleRepository.findBy({loanId: loanRef});
     }
 
-    async getDueLoans(): Promise<LoanScheduleEntity[]> {
+    async getDueLoans(thisDate:string): Promise<LoanScheduleEntity[]> {
 
-        return await this.loanScheduleRepository.query(`SELECT * FROM USERS`);
-        // const thisDataSource = new DataSource(config);
-        // thisDataSource.initialize();
-        // return await thisDataSource.manager.query(`SELECT * FROM USERS`);
+        return await this.loanScheduleRepository.query(`select * from loanSchedule where Date(dueDate) = `+ thisDate);
+
     }
 }
