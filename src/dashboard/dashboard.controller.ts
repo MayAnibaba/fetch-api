@@ -2,11 +2,12 @@ import { Controller, Post } from "@nestjs/common";
 import { get } from "http";
 import { LoanService } from "src/loan/loan.service";
 import { LoanScheduleService } from "src/loanSchedule/loanSchedule.service";
+import { TransactionService } from "src/transaction/transaction.service";
 
 @Controller('dashboard')
 export class DashboardContoller{
 
-    constructor(private readonly loanService : LoanService, private readonly loanScheduleService : LoanScheduleService){}
+    constructor(private readonly loanService : LoanService, private readonly loanScheduleService : LoanScheduleService, private readonly transactionService : TransactionService){}
 
     @Post()
     async dashboardData() {
@@ -21,12 +22,13 @@ export class DashboardContoller{
 
         const dueLoans =  await this.loanScheduleService.getDueLoanSum(fullDate);
         const activeLoans = await this.loanService.getAllActiveLoanCount();
+        const collectedRepayments = await this.transactionService.getAllTodaySum(fullDate)
 
         return ({
             dueLoan: dueLoans,
             activeLoan: activeLoans,
             successRate: '',
-            collectedRepayments: '',
+            collectedRepayments: collectedRepayments,
         })
     }
 

@@ -11,6 +11,17 @@ export class TransactionService{
         return await this.transactionRepository.find();
     }
 
+    async getAllTodayList(): Promise<TransactionEntity[]>{
+        return await this.transactionRepository.find();
+    }
+
+
+    async getAllTodaySum(thisDate:string): Promise<string> {
+        const sql = 'select sum(amount) from loanSchedule where status="success" and Date(createdAt) = "'+ thisDate + '"';
+        console.log(sql);
+        return await this.transactionRepository.query(sql);
+    }
+
 
     
 }
