@@ -25,10 +25,9 @@ export class DashboardContoller{
         const collectedRepayments = await this.transactionService.getAllTodaySum(fullDate)
 
         return ({
-            dueLoan: dueLoans,
-            activeLoan: activeLoans,
-            successRate: '',
-            collectedRepayments: collectedRepayments,
+            dueLoan: dueLoans[0].total,
+            activeLoan: activeLoans[0].counts,
+            collectedRepayments: collectedRepayments[0].total,
         })
     }
 

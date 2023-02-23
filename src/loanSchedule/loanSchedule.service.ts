@@ -20,8 +20,8 @@ export class LoanScheduleService {
 
     }
 
-    async getDueLoanSum(thisDate:string): Promise<LoanScheduleEntity[]> {
-        const sql = 'select sum(dueAmount) from loanSchedule where Date(dueDate) = "'+ thisDate + '"';
+    async getDueLoanSum(thisDate:string): Promise<any> {
+        const sql = 'select sum(dueAmount) as total from loanSchedule where Date(dueDate) = "'+ thisDate + '"';
         console.log(sql);
         return await this.loanScheduleRepository.query(sql);
     }
