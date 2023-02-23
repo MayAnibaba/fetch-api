@@ -12,6 +12,8 @@ const config: MysqlConnectionOptions = {
     logging: true,
 }
 
+
+
 // const config: MysqlConnectionOptions = {
 //     type: 'mysql',
 //     host: 'localhost',

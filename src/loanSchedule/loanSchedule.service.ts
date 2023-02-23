@@ -13,8 +13,10 @@ export class LoanScheduleService {
     }
 
     async getDueLoans(): Promise<LoanScheduleEntity[]> {
-        const thisDataSource = new DataSource(config);
-        thisDataSource.initialize();
-        return await thisDataSource.manager.query(`SELECT * FROM USERS`)
+
+        return await this.loanScheduleRepository.query(`SELECT * FROM USERS`);
+        // const thisDataSource = new DataSource(config);
+        // thisDataSource.initialize();
+        // return await thisDataSource.manager.query(`SELECT * FROM USERS`);
     }
 }
