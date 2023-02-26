@@ -43,7 +43,8 @@ export class TokenDataController {
                     const loanSchedule = new LoanScheduleEntity();
 
                     var onlyDay = n.PaymentDueDate.split(" ");
-                    var newdate = onlyDay[0].split("/").reverse().join("-");
+                    var newdatearray = onlyDay[0].split("/");
+                    var newdate = newdatearray[2]+'-'+newdatearray[0]+'-'+newdatearray[1]
 
                     loanSchedule.loanAccountNumber = thisLoan.loanAccountNumber.toString();
                     loanSchedule.dueDate = newdate;
