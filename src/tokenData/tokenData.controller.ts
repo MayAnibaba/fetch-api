@@ -48,7 +48,7 @@ export class TokenDataController {
 
                     loanSchedule.loanAccountNumber = thisLoan.loanAccountNumber.toString();
                     loanSchedule.dueDate = newdate;
-                    loanSchedule.dueAmount = parseFloat(n.Total);
+                    loanSchedule.dueAmount = parseFloat(n.Total.replace(/,/g, ''));
 
                     await this.loanScheduleService.createLoanSchedule(loanSchedule);
                 }
