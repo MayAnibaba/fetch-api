@@ -11,7 +11,7 @@ export class LoanScheduleEntity {
     scheduleRef: string;
 
     @Column()
-    loanId: string;
+    loanAccountNumber: string;
 
     @Column({type: 'date'})
     dueDate: string; 

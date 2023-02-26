@@ -9,7 +9,7 @@ export class LoanScheduleService {
     constructor(@InjectRepository(LoanScheduleEntity)private readonly loanScheduleRepository: Repository<LoanScheduleEntity>){}
 
     async getScheduleByAcc(loanRef:string): Promise<LoanScheduleEntity[]>{
-        return await this.loanScheduleRepository.findBy({loanId: loanRef});
+        return await this.loanScheduleRepository.findBy({loanAccountNumber: loanRef});
     }
 
     async getDueLoansCount(thisDate:string): Promise<LoanScheduleEntity[]> {
@@ -32,5 +32,9 @@ export class LoanScheduleService {
         console.log(sql);
         return await this.loanScheduleRepository.query(sql);
 
+    }
+
+    async createLoanSchedule(loanScheduleData:LoanScheduleEntity): Promise<any>{
+        return await this.loanScheduleRepository.save(loanScheduleData);
     }
 }

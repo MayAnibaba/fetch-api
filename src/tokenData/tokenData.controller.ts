@@ -4,10 +4,11 @@ import { TokenDataService } from "./tokenData.service";
 import { Body, Controller, Get, HttpStatus, Post, Res, Req, Param } from "@nestjs/common";
 import restConfig from "src/restconfig";
 import { LoanScheduleEntity } from "src/loanSchedule/loanSchedule.entity";
+import { LoanScheduleService } from "src/loanSchedule/loanSchedule.service";
 
 @Controller('tokens')
 export class TokenDataController {
-    constructor(private readonly tokenDataService : TokenDataService, private readonly loanService : LoanService){}
+    constructor(private readonly tokenDataService : TokenDataService, private readonly loanService : LoanService,  private readonly loanScheduleService : LoanScheduleService){}
 
     @Get(':loanRef')
     async getAllToken(@Param('loanRef') loanRef) {
@@ -22,7 +23,7 @@ export class TokenDataController {
 
     @Post('create')
     async addTokenData(@Body() tokenDataRequest: any, @Res({passthrough: true}) res){
-        console.log('Reset password: ' + JSON.stringify(tokenDataRequest))
+        console.log('create loan: ' + JSON.stringify(tokenDataRequest))
         const thisLoan = await this.loanService.getLoanByEmail(tokenDataRequest.email);
 
         const tde = new TokenDataEntity();
@@ -35,15 +36,21 @@ export class TokenDataController {
         const axios = require('axios');
                 const url = restConfig.bankOneUrl+'Loan/GetLoanRepaymentSchedule/'+restConfig.bankOneVersion+'?authtoken='+restConfig.bankOneAuthToken+'&loanAccountNumber='+thisLoan.loanAccountNumber+'&institutionCode='+restConfig.bankOneInsCode;
                 console.log(url);
-
                 const {data} = await axios.get(url);
-
                 console.log('received: ' + JSON.stringify(data));
 
-                if(data.IsSuccessful){
+                for(const n of data) {
                     const loanSchedule = new LoanScheduleEntity();
-                    
-                } 
+
+                    var onlyDay = n.PaymentDueDate.split(" ");
+                    var newdate = onlyDay[0].split("/").reverse().join("-");
+
+                    loanSchedule.loanAccountNumber = thisLoan.loanAccountNumber.toString();
+                    loanSchedule.dueDate = newdate;
+                    loanSchedule.dueAmount = parseFloat(n.Total);
+
+                    await this.loanScheduleService.createLoanSchedule(loanSchedule);
+                }
 
 
         return ({
