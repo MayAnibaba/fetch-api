@@ -19,7 +19,7 @@ export class LoanScheduleEntity {
     @Column({type: 'double'})
     dueAmount: number; 
 
-    @Column()
+    @Column({default: 'active'})
     status: string; 
 
     @Column({default: false})
