@@ -2,6 +2,8 @@ import { LoanService } from "src/loan/loan.service";
 import { TokenDataEntity } from "./tokenData.entity";
 import { TokenDataService } from "./tokenData.service";
 import { Body, Controller, Get, HttpStatus, Post, Res, Req, Param } from "@nestjs/common";
+import restConfig from "src/restconfig";
+import { LoanScheduleEntity } from "src/loanSchedule/loanSchedule.entity";
 
 @Controller('tokens')
 export class TokenDataController {
@@ -28,6 +30,21 @@ export class TokenDataController {
         tde.data = tokenDataRequest.data
         const createTokenDataResponse = await this.tokenDataService.addTokenData(tde);
         await this.loanService.updateLoan(thisLoan,tokenDataRequest.token,tokenDataRequest.tokenExpiry);
+
+
+        const axios = require('axios');
+                const url = restConfig.bankOneUrl+'Loan/GetLoanRepaymentSchedule/'+restConfig.bankOneVersion+'?authtoken='+restConfig.bankOneAuthToken+'&loanAccountNumber='+thisLoan.loanAccountNumber+'&institutionCode='+restConfig.bankOneInsCode;
+                console.log(url);
+
+                const {data} = await axios.get(url);
+
+                console.log('received: ' + JSON.stringify(data));
+
+                if(data.IsSuccessful){
+                    const loanSchedule = new LoanScheduleEntity();
+                    
+                } 
+
 
         return ({
             code: '00',
