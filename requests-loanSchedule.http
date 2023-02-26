@@ -3,5 +3,5 @@ POST https://fetch-api-production.up.railway.app/loanSchedules/byLoanRef
 Content-Type: application/json
 
 {
-    "loanRef":"e4df4a7d2f6a440187c396527d26f2be"
+    "loanRef":"05690013022002889"
 }
