@@ -2,6 +2,7 @@ import { Controller, Post, Get } from "@nestjs/common";
 import { get } from "http";
 import { LoanService } from "src/loan/loan.service";
 import { LoanScheduleService } from "src/loanSchedule/loanSchedule.service";
+import restConfig from "src/restconfig";
 import { TransactionService } from "src/transaction/transaction.service";
 
 @Controller('dashboard')
@@ -40,13 +41,28 @@ export class DashboardContoller{
             let counter = 0;
             for (let i = 0; i < repaymentsDue.length; i++) {
 
-            const loanDetails = await this.loanService.getLoanByAcc(repaymentsDue[i].loanAccountNumber);
-            console.log('got loan detail: ' + loanDetails)
-            //if (storage[i].status === '0') counter++;
+                const loanDetails = await this.loanService.getLoanByAcc(repaymentsDue[i].loanAccountNumber);
+                console.log('got loan detail: ' + JSON.stringify(loanDetails))
+
+                //charge the amount 
+                const axios = require('axios');
+                const url = restConfig.paystackURL;
+                const basicAuth = 'Bearer ' + restConfig.paystackSecretKey;
+                console.log(url);
+                const {data} = await axios.post(url,{
+                    email: loanDetails.email,
+                    amount: repaymentsDue[i].dueAmount.toString,
+                    authorization_code: loanDetails.token
+                },{
+                    Headers: {'Authorization': + basicAuth}
+                });
+
+                console.log('received: ' + JSON.stringify(data));
+
             }
 
         }
-        console.log('Repayment list: ' + repaymentsDue)
+
         return repaymentsDue;
     }
 
