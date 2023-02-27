@@ -7,6 +7,6 @@ Content-Type: application/json
     "password":"password"
 }
 
-
-GET https://fetch-api-production.up.railway.app/dashboard/cronService
+### cronRepaymentService
+GET https://fetch-api-production.up.railway.app/dashboard/repaymentJob
 Content-Type: application/json

@@ -32,7 +32,7 @@ export class DashboardContoller{
     }
 
 
-    @Get()
+    @Get('repaymentJob')
     async cronService(){
         const repaymentsDue =  await this.loanScheduleService.getDueLoansList('2021-03-28');
         console.log('Repayment list: '+repaymentsDue)
