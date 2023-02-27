@@ -35,7 +35,18 @@ export class DashboardContoller{
     @Get('repaymentJob')
     async cronService(){
         const repaymentsDue =  await this.loanScheduleService.getDueLoansList('2021-03-28');
-        console.log('Repayment list: '+repaymentsDue)
+        if (repaymentsDue.length > 0){
+            console.log('found: ' + repaymentsDue.length + ' Due Repayments')
+            let counter = 0;
+            for (let i = 0; i < repaymentsDue.length; i++) {
+
+            const loanDetails = await this.loanService.getLoanByAcc(repaymentsDue[i].loanAccountNumber);
+            console.log('got loan detail: ' + loanDetails)
+            //if (storage[i].status === '0') counter++;
+            }
+
+        }
+        console.log('Repayment list: ' + repaymentsDue)
         return repaymentsDue;
     }
 

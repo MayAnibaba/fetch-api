@@ -28,7 +28,7 @@ export class LoanScheduleService {
 
     async getDueLoansList(thisDate:string): Promise<LoanScheduleEntity[]> {
 
-        const sql = 'select * from loanSchedule where Date(dueDate) = "'+ thisDate + '"';
+        const sql = 'select * from loanSchedule where collectionStatus = "pending" and Date(dueDate) = "'+ thisDate + '"';
         console.log(sql);
         return await this.loanScheduleRepository.query(sql);
 
