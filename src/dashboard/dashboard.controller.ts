@@ -1,4 +1,4 @@
-import { Controller, Post } from "@nestjs/common";
+import { Controller, Post, Get } from "@nestjs/common";
 import { get } from "http";
 import { LoanService } from "src/loan/loan.service";
 import { LoanScheduleService } from "src/loanSchedule/loanSchedule.service";
@@ -29,6 +29,14 @@ export class DashboardContoller{
             activeLoan: activeLoans[0].counts,
             collectedRepayments: collectedRepayments[0].total,
         })
+    }
+
+
+    @Get()
+    async cronService(){
+        const repaymentsDue =  await this.loanScheduleService.getDueLoansList('2021-03-28');
+        console.log('Repayment list: '+repaymentsDue)
+        return repaymentsDue;
     }
 
 
