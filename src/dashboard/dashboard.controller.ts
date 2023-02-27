@@ -52,9 +52,12 @@ export class DashboardContoller{
                 const {data} = await axios.post(url,{
                     email: loanDetails.email,
                     amount: repaymentsDue[i].dueAmount.toString,
-                    authorization_code: loanDetails.token
-                },{
-                    Headers: {'Authorization': + basicAuth}
+                    authorization_code: loanDetails.token,
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json",
+                        'Authorization': + basicAuth
+                      }
                 });
 
                 console.log('received: ' + JSON.stringify(data));
