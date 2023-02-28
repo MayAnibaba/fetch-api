@@ -4,6 +4,7 @@ import { LoanService } from "src/loan/loan.service";
 import { LoanScheduleService } from "src/loanSchedule/loanSchedule.service";
 import restConfig from "src/restconfig";
 import { TransactionService } from "src/transaction/transaction.service";
+import { json } from "stream/consumers";
 
 @Controller('dashboard')
 export class DashboardContoller{
@@ -48,11 +49,11 @@ export class DashboardContoller{
                 const axios = require('axios');
                 const url = restConfig.paystackURL;
                 const basicAuth = 'bearer ' + restConfig.paystackSecretKey;
-                const payload = {
+                const payload =  JSON.stringify({
                     email: loanDetails.email,
                     amount: repaymentsDue[i].dueAmount.toString(),
                     authorization_code: loanDetails.token,
-                }
+                });
                 console.log(url);
                 console.log(basicAuth);
                 console.log(payload);
