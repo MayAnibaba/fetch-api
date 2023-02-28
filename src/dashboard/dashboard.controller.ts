@@ -47,8 +47,9 @@ export class DashboardContoller{
                 //charge the amount 
                 const axios = require('axios');
                 const url = restConfig.paystackURL;
-                const basicAuth = 'Bearer ' + restConfig.paystackSecretKey;
+                const basicAuth = 'bearer ' + restConfig.paystackSecretKey;
                 console.log(url);
+                console.log(basicAuth);
                 const {data} = await axios.post(url,{
                     email: loanDetails.email,
                     amount: repaymentsDue[i].dueAmount.toString,
