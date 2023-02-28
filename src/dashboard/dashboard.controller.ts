@@ -57,9 +57,17 @@ export class DashboardContoller{
                 console.log(basicAuth);
                 console.log(payload);
 
-                const {data} = await axios.post(url,payload,{
-                    headers: {Authorization:  basicAuth}
-                });
+                // const {data} = await axios.post(url,payload,{
+                //     headers: {Authorization:  basicAuth}
+                // });
+
+                const {data} = await axios({
+                    method: "post",
+                    url: url,
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": basicAuth,}
+                })
 
                 console.log('received: ' + JSON.stringify(data));
 
