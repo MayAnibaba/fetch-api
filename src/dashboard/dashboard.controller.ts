@@ -58,7 +58,7 @@ export class DashboardContoller{
                 console.log(payload);
 
                 const {data} = await axios.post(url,payload,{
-                    Headers: {
+                    headers: {
                         Authorization:  basicAuth
                       }
                 });
