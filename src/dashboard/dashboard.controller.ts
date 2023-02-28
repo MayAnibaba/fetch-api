@@ -53,7 +53,7 @@ export class DashboardContoller{
                     email: loanDetails.email,
                     amount: repaymentsDue[i].dueAmount.toString,
                     authorization_code: loanDetails.token,
-                    headers: {
+                    Headers: {
                         "Accept": "application/json",
                         "Content-Type": "application/json",
                         'Authorization': + basicAuth
@@ -62,7 +62,7 @@ export class DashboardContoller{
 
                 console.log('received: ' + JSON.stringify(data));
 
-            }
+            }  
 
         }
 
