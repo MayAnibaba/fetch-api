@@ -48,15 +48,16 @@ export class DashboardContoller{
                 const axios = require('axios');
                 const url = restConfig.paystackURL;
                 const basicAuth = 'bearer ' + restConfig.paystackSecretKey;
-                console.log(url);
-                console.log(basicAuth);
-                const {data} = await axios.post(url,{
+                const payload = {
                     email: loanDetails.email,
                     amount: repaymentsDue[i].dueAmount.toString,
                     authorization_code: loanDetails.token,
+                }
+                console.log(url);
+                console.log(basicAuth);
+                console.log(payload);
+                const {data} = await axios.post(url,payload,{
                     Headers: {
-                        "Accept": "application/json",
-                        "Content-Type": "application/json",
                         'Authorization': + basicAuth
                       }
                 });
