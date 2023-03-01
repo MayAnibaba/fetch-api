@@ -51,7 +51,7 @@ export class DashboardContoller{
                 const basicAuth = 'bearer ' + restConfig.paystackSecretKey;
                 const payload =  {
                     email: loanDetails.email,
-                    amount: repaymentsDue[i].dueAmount.toString(),
+                    amount: repaymentsDue[i].dueAmount,
                     authorization_code: loanDetails.token,
                 };
                 console.log(url);
