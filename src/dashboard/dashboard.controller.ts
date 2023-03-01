@@ -30,7 +30,7 @@ export class DashboardContoller{
         return ({
             dueLoan: dueLoans[0].total,
             activeLoan: activeLoans[0].counts,
-            collectedRepayments: collectedRepayments[0].total,
+            collectedRepayments: collectedRepayments[0].total / 100,
         })
     }
 
