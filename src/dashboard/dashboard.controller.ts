@@ -70,7 +70,10 @@ export class DashboardContoller{
                         "Authorization": basicAuth
                     },
                     data: payload                   
-                })
+                }).catch((error) => {
+                    console.log("axios error:",error);
+                    console.log(error.response.data);
+                });
 
                 console.log('received: ' + JSON.stringify(data));
 
