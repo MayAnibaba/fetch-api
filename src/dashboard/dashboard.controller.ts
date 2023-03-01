@@ -49,11 +49,11 @@ export class DashboardContoller{
                 const axios = require('axios');
                 const url = restConfig.paystackURL;
                 const basicAuth = 'bearer ' + restConfig.paystackSecretKey;
-                const payload =  JSON.stringify({
+                const payload =  {
                     email: loanDetails.email,
                     amount: repaymentsDue[i].dueAmount.toString(),
                     authorization_code: loanDetails.token,
-                });
+                };
                 console.log(url);
                 console.log(basicAuth);
                 console.log(payload);
