@@ -1,4 +1,11 @@
 ### get all users
-GET http://localhost:3000/transactions
+GET https://fetch-api-production.up.railway.app/transactions
 Content-Type: application/json
 
+### get by transRef
+POST https://fetch-api-production.up.railway.app/transactions/byTransRef
+Content-Type: application/json
+
+{
+    "transRef": "3151360508af4403bba1a7ef14af4572"
+}
