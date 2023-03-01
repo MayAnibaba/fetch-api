@@ -51,16 +51,12 @@ export class DashboardContoller{
                 const basicAuth = 'bearer ' + restConfig.paystackSecretKey;
                 const payload =  {
                     email: loanDetails.email,
-                    amount: repaymentsDue[i].dueAmount,
+                    amount: repaymentsDue[i].dueAmount * 100,
                     authorization_code: loanDetails.token,
                 };
                 console.log(url);
                 console.log(basicAuth);
                 console.log(payload);
-
-                // const {data} = await axios.post(url,payload,{
-                //     headers: {Authorization:  basicAuth}
-                // });
 
                 const {data} = await axios({
                     method: "post",
