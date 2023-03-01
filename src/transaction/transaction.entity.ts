@@ -31,6 +31,11 @@ export class TransactionEntity{
     createdAt: string;
 
     @BeforeInsert()
+    async getCreatedDate() {
+        this.createdAt = new Date().toJSON();
+    }
+
+    @BeforeInsert()
     async generateTransRef() {
         this.transRef = randomUUID().split("-").join("");
     }
