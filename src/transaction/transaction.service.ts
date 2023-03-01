@@ -11,6 +11,10 @@ export class TransactionService{
         return await this.transactionRepository.find();
     }
 
+    async getAllByTranRef(transRef:string): Promise<TransactionEntity>{
+        return await this.transactionRepository.findOneBy({transRef: transRef});
+    }
+
     async getAllTodayList(): Promise<TransactionEntity[]>{
         return await this.transactionRepository.find();
     }
