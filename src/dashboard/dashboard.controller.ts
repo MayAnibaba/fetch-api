@@ -3,6 +3,7 @@ import { get } from "http";
 import { LoanService } from "src/loan/loan.service";
 import { LoanScheduleService } from "src/loanSchedule/loanSchedule.service";
 import restConfig from "src/restconfig";
+import { TransactionEntity } from "src/transaction/transaction.entity";
 import { TransactionService } from "src/transaction/transaction.service";
 import { json } from "stream/consumers";
 
@@ -40,10 +41,13 @@ export class DashboardContoller{
         if (repaymentsDue.length > 0){
             console.log('found: ' + repaymentsDue.length + ' Due Repayments')
             let counter = 0;
+            
+            //loop repayments
             for (let i = 0; i < repaymentsDue.length; i++) {
 
                 const loanDetails = await this.loanService.getLoanByAcc(repaymentsDue[i].loanAccountNumber);
                 console.log('got loan detail: ' + JSON.stringify(loanDetails))
+                const thisTrans = new TransactionEntity();
 
                 //charge the amount 
                 const axios = require('axios');
@@ -54,6 +58,7 @@ export class DashboardContoller{
                     amount: repaymentsDue[i].dueAmount * 100,
                     authorization_code: loanDetails.token,
                 };
+                
                 console.log(url);
                 console.log(basicAuth);
                 console.log(payload);
@@ -69,15 +74,33 @@ export class DashboardContoller{
                 }).catch((error) => {
                     console.log("axios error:",error);
                     console.log(error.response.data);
+
+                    thisTrans.amount = 0;
+                    thisTrans.scheduleRef = repaymentsDue[i].scheduleRef;
+                    thisTrans.status = 'failed';
+                    thisTrans.code = '91';
+                    thisTrans.message = error;
+                    thisTrans.data = error.response.data;
+                    this.transactionService.addTransaction(thisTrans);
                 });
 
+                if(data.status){
+                    //charge successfull 
+                    thisTrans.amount = data.data.amount;
+                    thisTrans.scheduleRef = repaymentsDue[i].scheduleRef;
+                    thisTrans.status = 'success';
+                    thisTrans.code = '00';
+                    thisTrans.message = data.message;
+                    thisTrans.data = JSON.stringify(data);
+                    this.transactionService.addTransaction(thisTrans);
+                    this.loanScheduleService.updateLoanSchedule(repaymentsDue[i],'success',(data.data.amount / 100).toString());
+                }
                 console.log('received: ' + JSON.stringify(data));
-
             }  
 
         }
 
-        return repaymentsDue;
+        return 'success';
     }
 
 

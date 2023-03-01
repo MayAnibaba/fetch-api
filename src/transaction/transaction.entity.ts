@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { randomUUID } from "crypto";
+import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('transactions')
 export class TransactionEntity{
@@ -28,5 +29,10 @@ export class TransactionEntity{
 
     @Column({type: 'datetime'})
     createdAt: string;
+
+    @BeforeInsert()
+    async generateTransRef() {
+        this.transRef = randomUUID().split("-").join("");
+    }
 
 }
