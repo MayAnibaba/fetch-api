@@ -67,7 +67,9 @@ export class DashboardContoller{
                     url: url,
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": basicAuth,}
+                        "Authorization": basicAuth
+                    },
+                    data: payload                   
                 })
 
                 console.log('received: ' + JSON.stringify(data));
