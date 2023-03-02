@@ -29,6 +29,10 @@ export class TransactionService{
         return await this.transactionRepository.query(sql);
     }
 
+    async getAllSum(): Promise<any> {
+        const sql = 'select sum(amount) as total from transactions where status="success"';
+        console.log(sql);
+        return await this.transactionRepository.query(sql);
+    }
 
-    
 }

@@ -25,7 +25,7 @@ export class DashboardContoller{
 
         const dueLoans =  await this.loanScheduleService.getDueLoanSum(fullDate);
         const activeLoans = await this.loanService.getAllActiveLoanCount();
-        const collectedRepayments = await this.transactionService.getAllTodaySum(fullDate)
+        const collectedRepayments = await this.transactionService.getAllSum();
 
         return ({
             dueLoan: dueLoans[0].total,
@@ -34,10 +34,12 @@ export class DashboardContoller{
         })
     }
 
-
     @Get('repaymentJob')
     async cronService(){
-        const repaymentsDue =  await this.loanScheduleService.getDueLoansList('2021-03-28');
+        const yourDate = new Date()
+        yourDate.toISOString().split('T')[0]
+        //get for today
+        const repaymentsDue =  await this.loanScheduleService.getDueLoansList(yourDate.toISOString().split('T')[0]);
         if (repaymentsDue.length > 0){
             console.log('found: ' + repaymentsDue.length + ' Due Repayments')
             let counter = 0;
@@ -102,6 +104,8 @@ export class DashboardContoller{
 
         return 'success';
     }
+
+
 
 
 }
