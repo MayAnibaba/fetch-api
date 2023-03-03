@@ -2,6 +2,7 @@ import { Controller, Post, Get } from "@nestjs/common";
 import { get } from "http";
 import { LoanService } from "src/loan/loan.service";
 import { LoanScheduleService } from "src/loanSchedule/loanSchedule.service";
+import transporter from "src/mailconfig";
 import restConfig from "src/restconfig";
 import { TransactionEntity } from "src/transaction/transaction.entity";
 import { TransactionService } from "src/transaction/transaction.service";
@@ -103,6 +104,21 @@ export class DashboardContoller{
         }
 
         return 'success';
+    }
+
+    @Get('email')
+    async sendEmail(){
+
+        let info = await transporter.sendMail({
+            from: '"Sofri MFB" <noreply@noreply.com>', // sender address
+            to: "codegidi@live.com, ", // list of receivers
+            subject: "Update on your application", // Subject line
+            text: "Add your replayment instrument: ", // plain text body
+            html: "Add your replayment instrument: <a href=''>click here</a>", // html body
+        });
+
+        return 'done';
+
     }
 
 
