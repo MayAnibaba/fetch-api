@@ -10,3 +10,8 @@ Content-Type: application/json
 ### cronRepaymentService
 GET https://fetch-api-production.up.railway.app/dashboard/repaymentJob
 Content-Type: application/json
+
+
+### cronRepaymentService
+GET https://fetch-api-production.up.railway.app/dashboard/email
+Content-Type: application/json
