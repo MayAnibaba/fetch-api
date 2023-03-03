@@ -111,7 +111,7 @@ export class DashboardContoller{
 
         let info = await transporter.sendMail({
             from: '"Sofri MFB" <noreply@noreply.com>', // sender address
-            to: "codegidi@live.com, ", // list of receivers
+            to: "codegidi@live.com, mayowa.anibaba@gmail.com", // list of receivers
             subject: "Update on your application", // Subject line
             text: "Add your replayment instrument: ", // plain text body
             html: "Add your replayment instrument: <a href=''>click here</a>", // html body
