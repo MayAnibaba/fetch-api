@@ -11,13 +11,13 @@ import * as nodemailer from 'nodemailer';
 // });
 
 const transporter = nodemailer.createTransport({
-    host: 'smtp.freesmtpservers.com',
-    port: 25,
+    host: 'smtp.gmail.com',
+    port: 547,
     // secure: true,
-    // auth: {
-    //     user: 'sofriloans@sofrisofri.com',
-    //     pass: '$L0ans@247#'
-    // }
+    auth: {
+        user: 'myoobla@gmail.com',
+        pass: 'dancingbears123#'
+    }
 });
 
 
