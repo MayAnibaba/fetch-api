@@ -11,12 +11,10 @@ import * as nodemailer from 'nodemailer';
 // });
 
 const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
+    service: 'gmail',
     auth: {
-        user: 'myoobla@gmail.com',
-        pass: 'dancingbears123#'
+        user: 'mmayowa.anibaba@gmail.com',
+        pass: 'atfjkydwrytibzjl'
     }
 });
 
