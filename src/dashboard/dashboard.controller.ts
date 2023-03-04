@@ -119,11 +119,13 @@ export class DashboardContoller{
                 html: "Add your replayment instrument: <a href=''>click here</a>", // html body
             });
 
+            return 'done';
         } catch(Exception) {
             console.log(Exception.message);
+            return Exception.message;
         }
 
-        return 'done';
+        
 
     }
 
