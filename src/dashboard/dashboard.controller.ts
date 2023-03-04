@@ -109,13 +109,19 @@ export class DashboardContoller{
     @Get('email')
     async sendEmail(){
 
-        let info = await transporter.sendMail({
-            from: '"Sofri MFB" <noreply@noreply.com>', // sender address
-            to: "codegidi@live.com, mayowa.anibaba@gmail.com", // list of receivers
-            subject: "Update on your application", // Subject line
-            text: "Add your replayment instrument: ", // plain text body
-            html: "Add your replayment instrument: <a href=''>click here</a>", // html body
-        });
+        try {
+
+            let info = await transporter.sendMail({
+                from: '"Sofri MFB" <noreply@noreply.com>', // sender address
+                to: "codegidi@live.com, mayowa.anibaba@gmail.com", // list of receivers
+                subject: "Update on your application", // Subject line
+                text: "Add your replayment instrument: ", // plain text body
+                html: "Add your replayment instrument: <a href=''>click here</a>", // html body
+            });
+
+        } catch(Exception) {
+            console.log(Exception.message);
+        }
 
         return 'done';
 
