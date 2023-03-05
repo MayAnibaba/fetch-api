@@ -22,11 +22,11 @@ Content-Type: application/json
 }
 
 ### login
-POST http://localhost:3000/users/login
+POST https://fetch-api-production.up.railway.app/users/login
 Content-Type: application/json 
 
 {
-    "email":"mau@gmail.com",
+    "email":"mayowa.anibaba@gmail.com",
     "password":"password"
 }
 
