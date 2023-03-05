@@ -12,6 +12,6 @@ import { LogService } from "src/log/log.service";
 @Module({
     imports: [TypeOrmModule.forFeature([TransactionEntity,LoanEntity,LoanScheduleEntity,LogService])],
     controllers: [DashboardContoller],
-    providers: [TransactionService,LoanService,LoanScheduleService]
+    providers: [TransactionService,LoanService,LoanScheduleService,LogService]
 })
 export class DashboardModule{}
