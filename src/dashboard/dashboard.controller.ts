@@ -2,6 +2,8 @@ import { Controller, Post, Get } from "@nestjs/common";
 import { get } from "http";
 import { LoanService } from "src/loan/loan.service";
 import { LoanScheduleService } from "src/loanSchedule/loanSchedule.service";
+import { LogEntitiy } from "src/log/log.entity";
+import { LogService } from "src/log/log.service";
 import transporter from "src/mailconfig";
 import restConfig from "src/restconfig";
 import { TransactionEntity } from "src/transaction/transaction.entity";
@@ -11,7 +13,7 @@ import { TransactionService } from "src/transaction/transaction.service";
 @Controller('dashboard')
 export class DashboardContoller{
 
-    constructor(private readonly loanService : LoanService, private readonly loanScheduleService : LoanScheduleService, private readonly transactionService : TransactionService){}
+    constructor(private readonly loanService : LoanService, private readonly loanScheduleService : LoanScheduleService, private readonly logService : LogService, private readonly transactionService : TransactionService){}
 
     @Post()
     async dashboardData() {
@@ -44,6 +46,12 @@ export class DashboardContoller{
         if (repaymentsDue.length > 0){
             console.log('found: ' + repaymentsDue.length + ' Due Repayments')
             let counter = 0;
+            const thisLog = new LogEntitiy();
+
+            thisLog.repaymentsFound = repaymentsDue.length
+            thisLog.lastRepaymentTime = new Date().toJSON();
+
+            this.logService.createLog(thisLog);
             
             //loop repayments
             for (let i = 0; i < repaymentsDue.length; i++) {

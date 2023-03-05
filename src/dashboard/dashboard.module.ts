@@ -7,9 +7,10 @@ import { LoanService } from "src/loan/loan.service";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { LoanScheduleEntity } from "src/loanSchedule/loanSchedule.entity";
 import { LoanScheduleService } from "src/loanSchedule/loanSchedule.service";
+import { LogService } from "src/log/log.service";
 
 @Module({
-    imports: [TypeOrmModule.forFeature([TransactionEntity,LoanEntity,LoanScheduleEntity])],
+    imports: [TypeOrmModule.forFeature([TransactionEntity,LoanEntity,LoanScheduleEntity,LogService])],
     controllers: [DashboardContoller],
     providers: [TransactionService,LoanService,LoanScheduleService]
 })

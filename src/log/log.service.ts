@@ -12,7 +12,7 @@ export class LogService{
     }
 
 
-    async createLoan(logData:LogEntitiy): Promise<any>{
+    async createLog(logData:LogEntitiy): Promise<any>{
         return await this.logRepository.save(logData);
     }
 }
