@@ -42,18 +42,19 @@ export class DashboardContoller{
     @Get('repaymentJob')
     async cronService(){
         const yourDate = new Date()
-        yourDate.toISOString().split('T')[0]
+        yourDate.toISOString().split('T')[0];
+
+        const thisLog = new LogEntitiy();
+        thisLog.lastRepaymentTime = new Date().toJSON();
+
         //get for today
         const repaymentsDue =  await this.loanScheduleService.getDueLoansList(yourDate.toISOString().split('T')[0]);
         if (repaymentsDue.length > 0){
             console.log('found: ' + repaymentsDue.length + ' Due Repayments')
             let counter = 0;
-            const thisLog = new LogEntitiy();
 
             thisLog.repaymentsFound = repaymentsDue.length
-            thisLog.lastRepaymentTime = new Date().toJSON();
 
-            this.logService.createLog(thisLog);
             
             //loop repayments
             for (let i = 0; i < repaymentsDue.length; i++) {
@@ -111,8 +112,11 @@ export class DashboardContoller{
                 console.log('received: ' + JSON.stringify(data));
             }  
 
+        } else {
+            thisLog.repaymentsFound = 0;
         }
-
+        
+        this.logService.createLog(thisLog);
         return 'success';
     }
 
