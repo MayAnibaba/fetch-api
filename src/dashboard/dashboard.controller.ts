@@ -35,7 +35,7 @@ export class DashboardContoller{
             dueLoan: dueLoans[0].total,
             activeLoan: activeLoans[0].counts,
             collectedRepayments: collectedRepayments[0].total / 100,
-            lastLogTime: lastLogTime[0].lastRepaymentTime
+            lastLogTime: lastLogTime
         })
     }
 
