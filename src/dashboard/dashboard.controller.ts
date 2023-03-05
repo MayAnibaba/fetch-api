@@ -29,11 +29,13 @@ export class DashboardContoller{
         const dueLoans =  await this.loanScheduleService.getDueLoanSum(fullDate);
         const activeLoans = await this.loanService.getAllActiveLoanCount();
         const collectedRepayments = await this.transactionService.getAllSum();
+        const lastLogTime = await this.logService.getLastLogActivity();
 
         return ({
             dueLoan: dueLoans[0].total,
             activeLoan: activeLoans[0].counts,
             collectedRepayments: collectedRepayments[0].total / 100,
+            lastLogTime: lastLogTime[0].lastRepaymentTime
         })
     }
 

@@ -7,7 +7,7 @@ import { Repository } from "typeorm";
 export class LogService{
     constructor(@InjectRepository(LogEntitiy)private readonly logRepository: Repository<LogEntitiy>){}
 
-    async getAllActiveLoanCount(): Promise<LogEntitiy>{
+    async getLastLogActivity(): Promise<LogEntitiy>{
         return await this.logRepository.query('select * from logs order by id Desc limit 1');
     }
 
