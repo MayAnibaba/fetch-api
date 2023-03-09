@@ -149,7 +149,11 @@ export class DashboardContoller{
                 console.log('Request: ' + url);
                 const {data} = await axios.get(url);
                 console.log('Received: ' + JSON.stringify(data));
+
+                return JSON.stringify(data)
             }
+
+           
          
 
 

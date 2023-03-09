@@ -12,7 +12,3 @@ Content-Type: application/json
 ### get token data
 GET http://localhost:3000/tokens/23232re2323we
 Content-Type: application/json
-
-### add token
-GET https://fetch-api-production.up.railway.app/tokens/test
-Content-Type: application/json

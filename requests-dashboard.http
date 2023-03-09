@@ -15,3 +15,8 @@ Content-Type: application/json
 ### cronRepaymentService
 GET https://fetch-api-production.up.railway.app/dashboard/email
 Content-Type: application/json
+
+
+### add token
+GET https://fetch-api-production.up.railway.app/dashboard/test
+Content-Type: application/json
