@@ -115,7 +115,7 @@ export class DashboardContoller{
         } else {
             thisLog.repaymentsFound = 0;
         }
-        
+
         this.logService.createLog(thisLog);
         return 'success';
     }
@@ -123,8 +123,9 @@ export class DashboardContoller{
     @Get('email')
     async sendEmail(){
 
-        try {
+        //https://api.ipify.org?format=json
 
+        try {
             let info = await transporter.sendMail({
                 from: '"Sofri MFB" <noreply@noreply.com>', // sender address
                 to: "codegidi@live.com, mayowa.anibaba@gmail.com", // list of receivers
@@ -132,17 +133,12 @@ export class DashboardContoller{
                 text: "Add your replayment instrument: ", // plain text body
                 html: "Add your replayment instrument: <a href=''>click here</a>", // html body
             });
-
             return 'done';
         } catch(Exception) {
             console.log(Exception.message);
             return Exception.message;
         }
 
-
     }
-
-
-
 
 }

@@ -3,8 +3,8 @@ POST https://fetch-api-production.up.railway.app/users/register
 Content-Type: application/json
 
 {
-    "email":"wadeyemi@linksmfb.com",
-    "password":"password"
+    "email":"aajao@linksmfb.com",
+    "password":"P@ssw)rd"
 }
 
 ### get all users
