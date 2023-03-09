@@ -65,16 +65,12 @@ export class LoanController {
 
                 let {data} = await axios.get(url);
 
-                // const response  =  await fetch(url, {
-                //     method: 'GET',
-                //     headers: {'Content-Type': 'application/json'},
-                //     //body: '{}'
-                // })
     
                 //const data = await response.json();
                 if(restConfig.env == "live"){
                     data = JSON.parse(data);
                 }
+
                 console.log('received: ' + JSON.stringify(data));
 
     
