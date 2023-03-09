@@ -63,7 +63,7 @@ export class LoanController {
 
                 console.log(url);
 
-                const {data} = await axios.get(url);
+                let {data} = await axios.get(url);
 
                 // const response  =  await fetch(url, {
                 //     method: 'GET',
@@ -72,8 +72,11 @@ export class LoanController {
                 // })
     
                 //const data = await response.json();
+                if(restConfig.env == "live"){
+                    data = JSON.parse(data);
+                }
                 console.log('received: ' + JSON.stringify(data));
-                //const dataObj = JSON.parse(data);
+
     
                 if(data.IsSuccessful){
                     const loanEntity = new LoanEntity();
