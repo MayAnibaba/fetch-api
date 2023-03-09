@@ -13,3 +13,13 @@ Content-Type: application/json
 GET http://localhost:3000/tokens/23232re2323we
 Content-Type: application/json
 
+### add token
+POST https://fetch-api-production.up.railway.app/tokens/test
+Content-Type: application/json
+
+{
+    "email":"23232re2323we",
+    "token":"",
+    "tokenExpiry":"",
+    "data":"password"
+}

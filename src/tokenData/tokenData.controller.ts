@@ -63,7 +63,7 @@ export class TokenDataController {
     }
 
 
-    @Post('create')
+    @Get('test')
     async test(@Body() tokenDataRequest: any, @Res({passthrough: true}) res){
         console.log('create loan: ' + JSON.stringify(tokenDataRequest))
         
