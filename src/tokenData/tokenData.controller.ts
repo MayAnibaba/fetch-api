@@ -34,7 +34,13 @@ export class TokenDataController {
 
 
         const axios = require('axios');
-                const url = restConfig.bankOneUrl+'Loan/GetLoanRepaymentSchedule/'+restConfig.bankOneVersion+'?authtoken='+restConfig.bankOneAuthToken+'&loanAccountNumber='+thisLoan.loanAccountNumber+'&institutionCode='+restConfig.bankOneInsCode;
+        let url = "";
+                if(restConfig.env == "live"){
+                    url = restConfig.proxy+'?type=account&id='+thisLoan.loanAccountNumber;
+                } else {
+                    url = restConfig.bankOneUrl+'Loan/GetLoanRepaymentSchedule/'+restConfig.bankOneVersion+'?authtoken='+restConfig.bankOneAuthToken+'&loanAccountNumber='+thisLoan.loanAccountNumber+'&institutionCode='+restConfig.bankOneInsCode;
+                }
+  
                 console.log(url);
                 const {data} = await axios.get(url);
                 console.log('received: ' + JSON.stringify(data));

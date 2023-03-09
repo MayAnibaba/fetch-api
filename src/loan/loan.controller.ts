@@ -53,7 +53,14 @@ export class LoanController {
                 
                 //const data = await this.loanService.getLoanFormCBA(addRequest.loanAccountNumber);
                 const axios = require('axios');
-                const url = restConfig.bankOneUrl+'Loan/GetLoanByAccountNumber/'+restConfig.bankOneVersion+'?authtoken='+restConfig.bankOneAuthToken+'&loanAccountNumber='+addRequest.loanAccountNumber+'&institutionCode='+restConfig.bankOneInsCode;
+                let url = "";
+
+                if(restConfig.env == "live"){
+                    url = restConfig.proxy+'?type=account&id='+addRequest.loanAccountNumber
+                } else {
+                    url = restConfig.bankOneUrl+'Loan/GetLoanByAccountNumber/'+restConfig.bankOneVersion+'?authtoken='+restConfig.bankOneAuthToken+'&loanAccountNumber='+addRequest.loanAccountNumber+'&institutionCode='+restConfig.bankOneInsCode;
+                }
+
                 console.log(url);
 
                 const {data} = await axios.get(url);
