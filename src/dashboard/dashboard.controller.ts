@@ -141,4 +141,16 @@ export class DashboardContoller{
 
     }
 
+
+    @Get('test')
+    async testCall() {
+        const axios = require('axios');
+                const url = 'https://api.ipify.org?format=json';
+                console.log('Request: ' + url);
+                const {data} = await axios.get(url);
+                console.log('Received: ' + JSON.stringify(data));
+            }
+         
+
+
 }
