@@ -67,9 +67,9 @@ export class LoanController {
 
     
                 //const data = await response.json();
-                if(restConfig.env == "live"){
-                    data = JSON.parse(data);
-                }
+                // if(restConfig.env == "live"){
+                //     data = JSON.parse(data);
+                // }
 
                 console.log('received: ' + JSON.stringify(data));
 
