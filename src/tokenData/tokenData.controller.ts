@@ -63,23 +63,15 @@ export class TokenDataController {
     }
 
 
+
     @Get('test')
-    async test(@Body() tokenDataRequest: any, @Res({passthrough: true}) res){
-        console.log('create loan: ' + JSON.stringify(tokenDataRequest))
-        
+    async testCall() {
         const axios = require('axios');
                 const url = 'https://api.ipify.org?format=json';
-                console.log(url);
+                console.log('Request: ' + url);
                 const {data} = await axios.get(url);
-                console.log('received: ' + JSON.stringify(data));
-
-
-        return ({
-            code: '00',
-            status: 'successful',
-            message: JSON.stringify(data),
-        })
+                console.log('Received: ' + JSON.stringify(data));
+            }
         
-    }
 
 }
