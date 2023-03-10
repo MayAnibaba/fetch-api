@@ -36,7 +36,7 @@ export class TokenDataController {
         const axios = require('axios');
         let url = "";
                 if(restConfig.env == "live"){
-                    url = restConfig.proxy+'?type=account&id='+thisLoan.loanAccountNumber;
+                    url = restConfig.proxy+'?type=schedule&id='+thisLoan.loanAccountNumber;
                 } else {
                     url = restConfig.bankOneUrl+'Loan/GetLoanRepaymentSchedule/'+restConfig.bankOneVersion+'?authtoken='+restConfig.bankOneAuthToken+'&loanAccountNumber='+thisLoan.loanAccountNumber+'&institutionCode='+restConfig.bankOneInsCode;
                 }
