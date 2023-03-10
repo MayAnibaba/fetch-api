@@ -43,21 +43,28 @@ export class TokenDataController {
   
                 console.log(url);
                 const {data} = await axios.get(url);
-                console.log('received: ' + JSON.stringify(data));
+                console.log('received loan repayment schedule: ' + JSON.stringify(data));
 
-                for(const n of data) {
-                    const loanSchedule = new LoanScheduleEntity();
-
-                    var onlyDay = n.PaymentDueDate.split(" ");
-                    var newdatearray = onlyDay[0].split("/");
-                    var newdate = newdatearray[2]+'-'+newdatearray[0]+'-'+newdatearray[1]
-
-                    loanSchedule.loanAccountNumber = thisLoan.loanAccountNumber.toString();
-                    loanSchedule.dueDate = newdate;
-                    loanSchedule.dueAmount = parseFloat(n.Total.replace(/,/g, ''));
-
-                    await this.loanScheduleService.createLoanSchedule(loanSchedule);
+                try{
+                    for(const n of data) {
+                        const loanSchedule = new LoanScheduleEntity();
+    
+                        var onlyDay = n.PaymentDueDate.split(" ");
+                        var newdatearray = onlyDay[0].split("/");
+                        var newdate = newdatearray[2]+'-'+newdatearray[0]+'-'+newdatearray[1]
+    
+                        loanSchedule.loanAccountNumber = thisLoan.loanAccountNumber.toString();
+                        loanSchedule.dueDate = newdate;
+                        loanSchedule.dueAmount = parseFloat(n.Total.replace(/,/g, ''));
+    
+                        await this.loanScheduleService.createLoanSchedule(loanSchedule);
+                    }
+                } catch(Exception) {
+                    console.log(Exception.message);
+                    console.log('no repayment schedule received');
                 }
+
+
 
 
         return ({
